@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="dark" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+    <base href="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" id="baseStyle" href="stage/build/export/base.css?v=3.5.7"/>
+    <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="appearance/themes/midnight/theme.css?v=3.5.7"/>
+    <script src="stage/protyle/js/protyle-html.js?v=3.5.7"></script>
+    
+    <title>ML Class 6 Homework</title>
+    <!-- Exported by SiYuan v3.5.7 -->
+    <style>
+        body {font-family: var(--b3-font-family);background-color: var(--b3-theme-background);color: var(--b3-theme-on-background)}
+        @font-face {
+  font-family: "Emojis Additional";
+  src: url(appearance/fonts/Noto-COLRv1-2.047/Noto-COLRv1.woff2) format("woff2");
+  unicode-range: U+1fae9, U+1fac6, U+1fabe, U+1fadc, U+e50a, U+1fa89, U+1fadf, U+1f1e6-1f1ff, U+1f3f4, U+e0067, U+e0062,
+  U+e0065, U+e006e, U+e007f, U+e0073, U+e0063, U+e0074, U+e0077, U+e006c;
+  size-adjust: 85%;
+}
+@font-face {
+  font-family: "Emojis Reset";
+  src: local("Segoe UI Emoji"),
+  local("Segoe UI Symbol");
+  unicode-range: U+263a, U+21a9, U+2642, U+303d, U+2197, U+2198, U+2199, U+2196, U+2195, U+2194, U+2660, U+2665, U+2666, 
+  U+2663, U+3030, U+21aa, U+25b6, U+25c0, U+2640, U+203c, U+a9, U+ae, U+2122;
+  size-adjust: 85%;
+}
+@font-face {
+  font-family: "Emojis";
+  src: local("Segoe UI Emoji"),
+  local("Segoe UI Symbol");
+  size-adjust: 85%;
+}
+:root { --b3-font-size-editor: 16px }
+.b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: none }
+        
+        
+    </style>
+    <style id="snippetCSS20240908213950-5chvo6d">/*══════════  COLOURS & COMBINED FONT STACKS  ══════════*/
+:root {
+  /* Light theme */
+  --h1-clr: #ff6b81;   /* ruby red */
+  --h2-clr: #90a8ff;   /* royal blue */
+
+  /* Font stacks: Arial first for Latin, Chinese fonts for Han glyphs */
+  --font-yahei: "Arial", "微软雅黑", "Microsoft YaHei",
+                "PingFang SC", "Noto Sans CJK SC", sans-serif;
+
+  --font-kaiti: "Arial", "楷体", "KaiTi", "STKaiti", "KaiTi SC", serif;
+  --font-song:  "Arial", "宋体", "SimSun", serif;
+}
+
+/* Dark theme tints */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --h1-clr: #ff6b81;  /* rose ruby */
+    --h2-clr: #90a8ff;  /* royal blue 300 */
+  }
+}
+
+/*══════════  SHARED HEADING PROPS  ══════════*/
+h1, h2, h3, h4,
+.h1, .h2, .h3, .h4 {
+  margin: 0 0 0.7em;
+  line-height: 1.3;
+  scroll-margin-top: 5rem;           /* smooth anchor jumps */
+}
+
+/*══════════  H1  ══════════*/
+h1, .h1 {
+  font-family: var(--font-yahei);
+  font-size: clamp(2.8rem, 5vw + 0.8rem, 3.4rem); /* ≈45–54 px */
+  font-weight: 800;
+  color: var(--h1-clr);
+  letter-spacing: 0.5px;
+}
+
+/*══════════  H2  ══════════*/
+h2, .h2 {
+  font-family: var(--font-yahei);
+  font-size: clamp(2.2rem, 4vw + 0.5rem, 2.8rem); /* ≈34–45 px */
+  font-weight: 700;
+  color: var(--h2-clr);
+}
+
+/*══════════  H3  ══════════*/
+h3, .h3 {
+  font-family: var(--font-kaiti);
+  font-size: 1.625rem;               /* 26 px */
+  font-weight: 700;
+  color: inherit;                    /* follows body colour */
+}
+
+/*══════════  H4  (text underline)  ══════════*/
+h4, .h4 {
+  font-family: var(--font-song);
+  font-size: 0.75rem;                /* 20 px */
+  font-weight: 500;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;     /* slight gap below text */
+  text-decoration-thickness: 0.75px;    /* crisp 2 px line */
+}
+</style>
+</head>
+<body>
+<div class="b3-typography" 
+style="max-width: 800px;margin: 0 auto;" id="preview"><h1 id="ML-Class-6-Homework" title="ML Class 6 Homework" updated="20260411111741">ML Class 6 Homework</h1>
+<h1 id="20260407231234-dsgw3q7" updated="20260411110545">Problem 1: Build a multiagent TLC eluent optimization app</h1>
+<p id="20260408214129-atyn81i" updated="20260410183452">As introduced in the previous TLC homework, thin-layer chromatography (TLC) is one of the most common tools chemists use to quickly judge reaction progress and to select a suitable eluent for purification. In practice, chemists often adjust the eluent composition iteratively until the target product appears in a useful Rf window and is sufficiently separated from reactants or byproducts. In previous homework, you studied how molecular structure and solvent composition affect Rf values, and you used a model to predict TLC behavior.</p>
+<p id="20260410183456-z35m66p" updated="20260410184305">In this homework, you will go one step further: you will build a <span data-type="strong">multi-agent application</span> that mimics how a chemist reasons about TLC optimization. Since you don't have a TLC experiment setup in hand, we use the model trained in previous homework as a TLC emulator (模拟器) to obtain experimental TLC Rf value of a given molecule and eluent composition. <span data-type="strong">The application will accept a reaction SMILES (e.g., CC(=O)O.CCO>>CC(=O)OCC), identify reactants and products, and then use three cooperating agents to iteratively search for a better TLC eluent composition.</span></p>
+<p id="20260408214921-l3h6y5b" updated="20260408214129">To keep the homework manageable, use the following assumptions:</p>
+<ol id="20260408214921-st88qmo" updated="20260408214129">
+<li id="20260408214921-xveppcw" updated="20260408214129">
+<p id="20260408214921-4n1kgl5" updated="20260408214129">You may ignore catalysts, solvents, and reagents that are not part of the main organic transformation.</p>
+</li>
+<li id="20260408214921-4gy0st4" updated="20260408214129">
+<p id="20260408214921-rz4nfe1" updated="20260408215012">You may use a <span data-type="strong">binary eluent system</span> such as hexane / ethyl acetate, and the two solvent fractions should sum to <span data-type="strong">100%</span>.</p>
+</li>
+</ol>
+<h2 id="20260408214600-csg92fd" updated="20260411110545">Q1. Build three agents</h2>
+<p id="20260408214600-t3lo4si" updated="20260408215318">Implement the following three agents using an LLM API.</p>
+<blockquote id="20260408215318-8533ewi" updated="20260411110545">
+<p id="20260408215352-p1te9qv" updated="20260408215416">你可以考虑使用阿里云的大模型平台，会提供一些免费的token</p>
+<p updated="20260408221516" id="20260408215417-2tq3sjj">也可以用使用https://api.v36.cm/，这个上面什么模型都有，应该注册会送一些token，也不妨充值10块钱，对于我们的作业而言，基本上花不了多少钱</p>
+<p id="20260411110523-40q7amj" updated="20260411110545">至少使用gpt-4o-mini或者更强的模型</p>
+</blockquote>
+<p id="20260411110440-ncrr9vi" updated="20260411110518">You can find the examples system prompts for the following agents in the provided &quot;agent_prompts.yaml&quot; file.</p>
+<h4 id="20260408214706-mb570q4" updated="20260411094609">Agent 1: Explanation Agent</h4>
+<p id="20260408214706-k65q4ft" updated="20260410185413">This agent reads the current TLC experiment result and explains: 1) what the current TLC result implies chemically and 2) decide whether separation is good enough.</p>
+<h4 id="20260408214706-k8h4ie5" updated="20260410190320">Agent 2: Composition Tuning Agent</h4>
+<p id="20260408214706-ihzytro" updated="20260410184859">This agent proposes the <span data-type="strong">next eluent composition</span> to try based on results given by Explanation Agent and TLC principles. Its job is to reason about how changing solvent polarity will influence Rf values and separation. For example:</p>
+<ul start="0" id="20260408214706-pwujrhs" updated="20260408214129">
+<li id="20260408214706-iyd6h6m" updated="20260408214129">
+<p id="20260408214706-7uzareu" updated="20260408214129">if the product Rf is too low, the agent may increase eluent polarity;</p>
+</li>
+<li id="20260408214706-w4l0n1j" updated="20260408214129">
+<p id="20260408214706-f40b0l9" updated="20260408214129">if the product Rf is too high, the agent may decrease eluent polarity;</p>
+</li>
+<li id="20260408214706-zqg3a8m" updated="20260408214129">
+<p id="20260408214706-7uyrnpd" updated="20260408214129">if the product and a reactant are too close, the agent should try to improve separation by adjusting composition.</p>
+</li>
+</ul>
+<p id="20260408214706-0tpapln" updated="20260408214129">This agent should output the next candidate eluent composition.</p>
+<h4 id="20260408214706-7okwjer" updated="20260410190611">Agent 3: Experimentation Agent</h4>
+<p updated="20260410185924" id="20260408214706-fpr6rii">First, the TLC simulation model uses the proposed eluent composition to emulate the experiment under the proposed eluent composition. This agent gets the simulated TLC results, then assembles the results into a natural language form, which is used for sending to Explanation Agent.</p>
+<h2 id="20260408214600-3kh4frp" updated="20260411110557">Q2: Connect the agents into an iterative workflow</h2>
+<p id="20260408214600-t2q2vcv" updated="20260410190505">Your system should run in a loop like this:</p>
+<ol id="20260408214600-6620av5" updated="20260411110557">
+<li id="20260410190503-okmtg08" updated="20260411110557">
+<p id="20260410190503-978cphs" updated="20260411110557">User send a task request to separate product using TLC.</p>
+</li>
+<li updated="20260411100655" id="20260410190011-391pvnh">
+<p updated="20260411100655" id="20260410190011-z3de5rz">Run the <span data-type="strong">Explanation Agent</span> to interpret the results (if it is first iteration, receiving user task description prompt to start)</p>
+</li>
+<li id="20260411100516-y7bygca" updated="20260411100516">
+<p updated="20260411100516" id="20260411100516-0ehiajq">Run the <span data-type="strong">Composition Tuning Agent</span> to propose a better composition.</p>
+</li>
+<li id="20260410190032-xk5xsx9" updated="20260410190032">
+<p id="20260410190032-q41nz5s" updated="20260410190032">Run the <span data-type="strong">Experimentation Agent</span> to simulate TLC.</p>
+</li>
+<li id="20260408214600-w4z0ksr" updated="20260411100706">
+<p id="20260408214600-ba5evbi" updated="20260411100706">Go to step 2 and repeat until the stopping criterion is satisfied or the maximum iteration number is reached.</p>
+</li>
+</ol>
+<h2 id="20260408214600-6gnlkgj" updated="20260411111741">Q3: Optimizing the TLC eluent</h2>
+<p id="20260408221230-rfub5wl" updated="20260408221339">Let's use the same examples as in the previous homework. But now, you have to let the agents find the optimal eluent.</p>
+<p id="20260408221230-bw4dgnw" updated="20260408221430">Eluent criteria: in order to have a good separation performance of a mixture, we need to find a suitable eluent composition that the Rf value of the product is within 0.2~0.3, and other reactants should have Rf value difference &gt;0.1 compared to target compound. </p>
+<p id="20260408221230-xaehxjz" updated="20250315222250">Consider the following two widely used reactions in drug synthesis, we would like separate the product from the reaction crude.</p>
+<p id="20260408221230-tqmgfft" updated="20260411105045"><span data-type="strong">Buchwald-Hartwig cross-coupling reaction</span></p>
+<p id="20260408221230-8qn6j2r" updated="20260410190145">Assume the reaction crude (mixture after the reaction) only contains reactant <span data-type="strong">1</span> and product <span data-type="strong">2</span>. Find the right the eluent composition to separate <span data-type="strong">2</span> from <span data-type="strong">1</span> (<span data-type="text" style="color: var(--b3-font-color8);">for simplicity, you can just input the 1&gt;&gt;2 as reaction SMILES</span>)</p>
+<p id="20260408221230-yji50yd" updated="20250315222144">​<span contenteditable="false" data-type="img" class="img" style="min-width: calc(100% - 0.1em);"><span> </span><span style="width: 550px;"><span class="protyle-action protyle-icons"><span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMore"></use></svg></span></span><img src="assets/image-20250315222141-p8hrp95.png" data-src="assets/image-20250315222141-p8hrp95.png" alt="image" /><span class="protyle-action__drag"></span><span class="protyle-action__title"><span></span></span></span><span> </span></span>​</p>
+<blockquote id="20260408221230-tke4wk6" updated="20250315223407">
+<p id="20260408221230-3vzs8fu" updated="20250315223407">Reference: https://en.wikipedia.org/wiki/Buchwald%E2%80%93Hartwig_amination</p>
+</blockquote>
+<p id="20260408221230-osonl6n" updated="20250315223646">If you don't have ChemDraw software installed, you can use the online molecular drawing tool to draw molecule and obtain its SMILES.</p>
+<p id="20260408221230-vd5owu5" updated="20250315223725">https://www.rcsb.org/chemical-sketch</p>
+<p id="20260408221230-hc62snx" updated="20250315223909">https://molview.org/  ---- Draw the molecule, then click &quot;Tools--&gt;Information Card&quot;</p>
+<p id="20260411111656-4tnsl5w" updated="20260411111741"><span data-type="text" style="background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);">Note: 本作业提供了比较详细的样本代码，考虑从基本代码做起</span></p>
+<p id="20260411111657-snl9f3c" updated="20260411111657">‍</p>
+</div>
+<script src="appearance/icons/material/icon.js?v=3.5.7"></script><script src="appearance/icons/Remix-icon/icon.js?v=3.5.7"></script>
+<script src="stage/build/export/protyle-method.js?v=3.5.7"></script>
+<script src="stage/protyle/js/lute/lute.min.js?v=3.5.7"></script>  
+<script>
+    
+    window.siyuan = {
+      config: {
+        appearance: { mode: 1, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+        editor: { 
+          codeLineWrap: true,
+          fontSize: 16,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: false,
+          katexMacros: decodeURI(`%7B%7D`),
+        }
+      },
+      languages: {copy:"复制"}
+    };
+    const previewElement = document.getElementById('preview');
+    Protyle.highlightRender(previewElement, "stage/protyle");
+    Protyle.mathRender(previewElement, "stage/protyle", false);
+    Protyle.mermaidRender(previewElement, "stage/protyle");
+    Protyle.flowchartRender(previewElement, "stage/protyle");
+    Protyle.graphvizRender(previewElement, "stage/protyle");
+    Protyle.chartRender(previewElement, "stage/protyle");
+    Protyle.mindmapRender(previewElement, "stage/protyle");
+    Protyle.abcRender(previewElement, "stage/protyle");
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, "stage/protyle");
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+            navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd().replace(/ /g, " ").replace(/‍```/g, "```"));
+            event.preventDefault();
+            event.stopPropagation();
+      })
+    });
+</script>
+</body></html>

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="dark" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+    <base href="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" id="baseStyle" href="stage/build/export/base.css?v=3.5.7"/>
+    <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="appearance/themes/midnight/theme.css?v=3.5.7"/>
+    <script src="stage/protyle/js/protyle-html.js?v=3.5.7"></script>
+    
+    <title>ML Class 3-5 Homework</title>
+    <!-- Exported by SiYuan v3.5.7 -->
+    <style>
+        body {font-family: var(--b3-font-family);background-color: var(--b3-theme-background);color: var(--b3-theme-on-background)}
+        @font-face {
+  font-family: "Emojis Additional";
+  src: url(appearance/fonts/Noto-COLRv1-2.047/Noto-COLRv1.woff2) format("woff2");
+  unicode-range: U+1fae9, U+1fac6, U+1fabe, U+1fadc, U+e50a, U+1fa89, U+1fadf, U+1f1e6-1f1ff, U+1f3f4, U+e0067, U+e0062,
+  U+e0065, U+e006e, U+e007f, U+e0073, U+e0063, U+e0074, U+e0077, U+e006c;
+  size-adjust: 85%;
+}
+@font-face {
+  font-family: "Emojis Reset";
+  src: local("Segoe UI Emoji"),
+  local("Segoe UI Symbol");
+  unicode-range: U+263a, U+21a9, U+2642, U+303d, U+2197, U+2198, U+2199, U+2196, U+2195, U+2194, U+2660, U+2665, U+2666, 
+  U+2663, U+3030, U+21aa, U+25b6, U+25c0, U+2640, U+203c, U+a9, U+ae, U+2122;
+  size-adjust: 85%;
+}
+@font-face {
+  font-family: "Emojis";
+  src: local("Segoe UI Emoji"),
+  local("Segoe UI Symbol");
+  size-adjust: 85%;
+}
+:root { --b3-font-size-editor: 16px }
+.b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: none }
+        
+        
+    </style>
+    <style id="snippetCSS20240908213950-5chvo6d">/*══════════  COLOURS & COMBINED FONT STACKS  ══════════*/
+:root {
+  /* Light theme */
+  --h1-clr: #ff6b81;   /* ruby red */
+  --h2-clr: #90a8ff;   /* royal blue */
+
+  /* Font stacks: Arial first for Latin, Chinese fonts for Han glyphs */
+  --font-yahei: "Arial", "微软雅黑", "Microsoft YaHei",
+                "PingFang SC", "Noto Sans CJK SC", sans-serif;
+
+  --font-kaiti: "Arial", "楷体", "KaiTi", "STKaiti", "KaiTi SC", serif;
+  --font-song:  "Arial", "宋体", "SimSun", serif;
+}
+
+/* Dark theme tints */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --h1-clr: #ff6b81;  /* rose ruby */
+    --h2-clr: #90a8ff;  /* royal blue 300 */
+  }
+}
+
+/*══════════  SHARED HEADING PROPS  ══════════*/
+h1, h2, h3, h4,
+.h1, .h2, .h3, .h4 {
+  margin: 0 0 0.7em;
+  line-height: 1.3;
+  scroll-margin-top: 5rem;           /* smooth anchor jumps */
+}
+
+/*══════════  H1  ══════════*/
+h1, .h1 {
+  font-family: var(--font-yahei);
+  font-size: clamp(2.8rem, 5vw + 0.8rem, 3.4rem); /* ≈45–54 px */
+  font-weight: 800;
+  color: var(--h1-clr);
+  letter-spacing: 0.5px;
+}
+
+/*══════════  H2  ══════════*/
+h2, .h2 {
+  font-family: var(--font-yahei);
+  font-size: clamp(2.2rem, 4vw + 0.5rem, 2.8rem); /* ≈34–45 px */
+  font-weight: 700;
+  color: var(--h2-clr);
+}
+
+/*══════════  H3  ══════════*/
+h3, .h3 {
+  font-family: var(--font-kaiti);
+  font-size: 1.625rem;               /* 26 px */
+  font-weight: 700;
+  color: inherit;                    /* follows body colour */
+}
+
+/*══════════  H4  (text underline)  ══════════*/
+h4, .h4 {
+  font-family: var(--font-song);
+  font-size: 0.75rem;                /* 20 px */
+  font-weight: 500;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;     /* slight gap below text */
+  text-decoration-thickness: 0.75px;    /* crisp 2 px line */
+}
+</style>
+</head>
+<body>
+<div class="b3-typography" 
+style="max-width: 800px;margin: 0 auto;" id="preview"><h1 id="ML-Class-3-5-Homework" updated="20260326103029" title="ML Class 3-5 Homework">ML Class 3-5 Homework</h1>
+<h1 id="20250311173417-6senh09" updated="20250315213103">Problem 1: Prediction of Rf value for TLC analysis</h1>
+<p id="20250126170731-t8pblhg" updated="20250311173402">This homework aims at reproducing a recently published journal article: Xu, H. et al. High-throughput discovery of chemical structure-polarity relationships combining automation and machine-learning techniques. Chem (2022) doi:10.1016/j.chempr.2022.08.008.</p>
+<p id="20250306165457-g9on94q" updated="20250311173500">Thin-layer chromatography (TLC) is a chromatography technique that separates components in mixtures.</p>
+<p id="20250306165457-2nme3ad" updated="20250306165457">​<span contenteditable="false" data-type="img" class="img" style="min-width: calc(100% - 0.1em);"><span> </span><span style="width: 352px;"><span class="protyle-action protyle-icons"><span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMore"></use></svg></span></span><img src="assets/image-20250305235258-49aiipa.png" data-src="assets/image-20250305235258-49aiipa.png" alt="image" /><span class="protyle-action__drag"></span><span class="protyle-action__title"><span></span></span></span><span> </span></span>​</p>
+<p id="20250306165457-h783emk" updated="20250306165457">Reference: https://en.wikipedia.org/wiki/Thin-layer_chromatography</p>
+<p updated="20250311174653" id="20250306165457-wyet441"><span data-type="strong">The principle for TLC:</span> The separation of compounds is due to the differences in their attraction to the stationary phase and differences in solubility in the solvent. As a result, the compounds and the mobile phase compete for binding sites on the stationary phase. Different compounds in the sample mixture travel at different rates due to the differences in their partition coefficients. Different solvents, or different solvent mixtures, gives different separation.</p>
+<p updated="20250311174729" id="20250306165457-eoxkdum">The <span data-type="strong">retention factor (Rf)</span> quantifies the results. It is the distance traveled by a given substance divided by the distance traveled by the mobile phase.</p>
+<p id="20250311175032-bbdv9vg" updated="20250311175036">​<span contenteditable="false" data-type="img" class="img" style="min-width: calc(100% - 0.1em);"><span> </span><span style="width: 360px;"><span class="protyle-action protyle-icons"><span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMore"></use></svg></span></span><img src="assets/7jso583h-20250311175032-lmbn8h1.png" data-src="assets/7jso583h-20250311175032-lmbn8h1.png" alt="7jso583h" /><span class="protyle-action__drag"></span><span class="protyle-action__title"><span></span></span></span><span> </span></span>​</p>
+<p id="20250306165457-bn7kd21" updated="20250313235626">In normal-phase TLC, the stationary phase (typically silica gel) is polar. More polar compounds in a sample mixture interact more strongly with the polar stationary phase. As a result, more-polar compounds move less (resulting in smaller Rf) while less-polar compounds move higher up the plate (higher Rf). In addition, the composition of the mobile phase affects the Rf value. More polar mobile phase moves the compounds faster (higher Rf), and vice versa. </p>
+<p id="20250306165457-8sibouw" updated="20250306165457">This TLC experiment can be done by chemists or recently by robots:</p>
+<p id="20250306165457-czbodq9" updated="20250306165457">Manual: https://www.youtube.com/watch?v=ltT8vr5Wmz8</p>
+<p id="20250306165457-imnc69h" updated="20250311175129">Automated: https://www.bilibili.com/video/BV1am4y1o7yE/?vd_source=9b8c50763ab14a904e31cd2732423a33</p>
+<p id="20250306165457-ekwy63f" updated="20250311175220">Our task is to predict the Rf value using the collected experimental data.</p>
+<h2 id="20250311175220-cseotp6" updated="20250315213103">Q1: Download and understand the data</h2>
+<p id="20250311175245-vcfri7u" updated="20250315162936">You can download the data from the link provided by the paper. Or you can directly use the data provided in the homework.</p>
+<p id="20250315162441-0thre6o" updated="20250315162442">https://www.sciencedirect.com/science/article/pii/S2451929422004211</p>
+<p id="20250315162442-vwufapq" updated="20250315162518">https://github.com/woshixuhao/ML-Prediction-for-Rf-values</p>
+<p id="20250315162937-o9d33ot" updated="20250315162951">Use the following code to read the excel file:</p>
+<pre class="code-block" data-language="python" updated="20250315212650" id="20250315162952-1t03ig5"><code class="hljs">import pandas as pd
+# Read the Excel file into a DataFrame
+# put the excel file in the folder as your python file
+df = pd.read_excel('TLC_dataset.xlsx')
+
+# you may need to install &quot;openpyxl&quot; package to read excel file:
+# pip install openpyxl
+</code></pre>
+<p id="20250315163207-2t5bzrb" updated="20250315163233">Explanation of the data in the excel file:</p>
+<table colgroup="||||||" id="20250315163256-jgvp7p0" updated="20250315163412">
+<colgroup><col /><col /><col /><col /><col /><col /><col /></colgroup><thead><tr>
+<th>COMPOUND_SMILES</th>
+<th>H</th>
+<th>EA</th>
+<th>DCM</th>
+<th>MeOH</th>
+<th>Et2O</th>
+<th>Rf</th>
+</tr>
+</thead><tbody><tr>
+<td>Molecule SMILES</td>
+<td>Hexane</td>
+<td>Ethyl acetate</td>
+<td>Dichloromethane</td>
+<td>Methanol</td>
+<td>Diethyl ether</td>
+<td>Rf value</td>
+</tr>
+</tbody>
+</table>
+<p id="20250315163414-vqa0b5f" updated="20250315164014">The mobile phase contains hexane, ethyl acetate, dichloromethane, methanol, and diethyl ether. The number in the excel means their volume ratio of these solvent. If you consider the polarity of these solvent, they are ranked as &quot;Hexane &lt; Diethyl Ether &lt; Dichloromethane &lt; Ethyl Acetate &lt; Methanol&quot;. Thus, you can expect that, for the same molecule, a more polar eluent (containing more polar solvent) will move the molecule higher on the TLC plate (a larger Rf value).</p>
+<h3 id="20250315213038-7wy3tvy" updated="20250315213103">Task: Plot Rf vs. solvent ratio</h3>
+<p id="20250315164020-d86jjd1" updated="20250315213103">Pick 3 molecules (any 3 you like), and plotting their Rf value vs. the solvent ratio (similar to the Figure 5 in the original publication).</p>
+<h2 id="20250311175245-ryn1ew3" updated="20250316084036">Q2: Build a neural network model to predict Rf</h2>
+<p id="20250315164402-p04xlli" updated="20250315164536">As described above, the Rf value is determined by the molecular structure and eluent solvent composition. Thus, we need to input these factors into the neural network, and the output of the neural network model is Rf value.</p>
+<p updated="20250315170715" id="20250315164536-2v57e6m">One simple way is to use molecular fingerprints to represent the molecule structure. Thus, we can use the following inputs for the model: <span data-type="inline-math" data-subtype="math" data-content="X_i=[\text{fingerprints}, \text{H}, \text{EA}, \text{DCM}, \text{MeOH}, \text{Et2O}]" contenteditable="false" class="render-node"></span>. </p>
+<blockquote id="20250315164834-6vijioj" updated="20250315170845">
+<p id="20250315170724-o38i1w4" updated="20250315170845">The original paper includes other molecular descriptors which might help with improving the model accuracy. However, for the purpose of this homework, you don't need to do that. Of course, if you are interested, you can do similar things as the paper did. </p>
+</blockquote>
+<h3 id="20250315164953-qn3xhsk" updated="20250316084036">Task 1: Correctly convert SMILES to fingerprints</h3>
+<p id="20250315165040-lf7lkc6" updated="20250315165627">You have different options of fingerprints to use in RDkit (Morgan, Feature Morgan, RDKit, Atom pairs, Topological torsions). We have tried Morgan fingerprints in class. You can try different ones in this this homework. Follow this link to learn more how to use the molecular fingerprints (https://greglandrum.github.io/rdkit-blog/posts/2023-01-18-fingerprint-generator-tutorial.html)</p>
+<pre class="code-block" data-language="python" id="20250316083126-l5rc3xe" updated="20250316084036"><code class="hljs">def smiles_to_fingerprint(smiles, fp_type='morgan', radius=3, fpSize=128):
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        # Return an array of zeros if the SMILES conversion fails.
+        return np.zeros(fpSize, dtype=int)
+    if fp_type == 'morgan':
+        generator = rdFingerprintGenerator.GetMorganGenerator(radius=radius, fpSize=fpSize)
+    elif fp_type == 'rdkit':
+        generator = rdFingerprintGenerator.GetRDKitFPGenerator(fpSize=fpSize)
+    elif fp_type == 'atompair':
+        generator = rdFingerprintGenerator.GetAtomPairGenerator(fpSize=fpSize)
+    elif fp_type == 'topological':
+        generator = rdFingerprintGenerator.GetTopologicalTorsionGenerator(fpSize=fpSize)
+    else:
+        raise ValueError(f&quot;Unsupported fingerprint type: {fp_type}&quot;)
+
+    fp = generator.GetFingerprint(mol)
+    arr = np.zeros((fpSize,), dtype=int)
+    DataStructs.ConvertToNumpyArray(fp, arr)
+    return arr
+</code></pre>
+<p id="20250315165631-6e5eeo8" updated="20250315165946"><span data-type="strong">You need to at least try two fingerprints.</span></p>
+<h3 id="20250315165942-iup9hml" updated="20250315211113">Task 2: Prepare the dataset for training and testing</h3>
+<p id="20250315170002-97bsqo6" updated="20250315211113">After you can convert the molecular SMILES to fingerprints, you concatenate the fingerprints with the solvent ratios to get <span data-type="inline-math" data-subtype="math" data-content="X_i=[\text{fingerprints}, \text{H}, \text{EA}, \text{DCM}, \text{MeOH}, \text{Et2O}]" contenteditable="false" class="render-node"></span>.</p>
+<p id="20250315170204-4odu6dq" updated="20250315170237">Split the data randomly into training and testing data with a ratio of 0.8 for training and 0.2 for testing.</p>
+<h3 id="20250315170237-tony9az" updated="20260324204457">Task 3: Build a neural network model</h3>
+<p id="20250315170703-pzv7eq7" updated="20260324204457">Please use and modify the neural network model you have tried in ML Class 2.</p>
+<p id="20250315170255-bksfwhx" updated="20250315170515">Since the Rf value is within [0, 1], you can consider using sigmoid as the final output layer activation, since sigmoid function is also within [0,1]. This is what the paper used for the model output layer activation.</p>
+<p id="20250315170941-cbcb1l6" updated="20250315171000">You can start with the model structure like follows:</p>
+<pre class="code-block" data-language="python" id="20250315171027-bbdaqwk" updated="20250315171120"><code class="hljs"># X.shape[1] is your X_i dimension
+layers_config = [
+    (X.shape[1], 64, 'relu'),
+    (64, 32, 'relu'),
+    (32, 1, 'sigmoid')]
+</code></pre>
+<p id="20250315171128-4k48li6" updated="20250315211153">You can use a linear output (without activation). You will possibly obtain output values &gt;1 or &lt;0. You can set &gt;1 as 1 and &lt;0 as 0 with the following function during model prediction.</p>
+<div data-content="f(x) =
+\begin{cases} 
+1, &amp; x &gt; 1 \\
+x, &amp; 0 \leq x \leq 1 \\
+0, &amp; x &lt; 0
+\end{cases}" data-subtype="math" id="20250315172530-chwk6pa" updated="20250315172530"><div spin="1"></div></div>
+<h3 id="20250315171411-1nfhxow" updated="20250315211337">Task 4: Train the model</h3>
+<p id="20250315171428-m0b6ey4" updated="20250315211217">Try the model training as you did in HW2. The loss function should be <span data-type="strong">mean squared error (MSE)</span> loss:</p>
+<div data-content="\mathcal{L}_{\text{mse}}(\hat{y}, y) = (\hat{y}_i - y_i)^2" data-subtype="math" id="20250315171539-4brl175" updated="20250315171737"><div spin="1"></div></div>
+<blockquote id="20250315171556-e9zazf1" updated="20250315211224">
+<p id="20250315171600-e0rpq9t" updated="20250315171722">Note: in HW2, when we have sigmoid activation as the output layer and binary cross-entropy loss, we specially handle the gradient. But you don't need to do that here.</p>
+</blockquote>
+<p id="20250315211224-y59rqx4" updated="20250315211337">Please use mini-batch training approach. Play with the learning rate and training epoch to find the best performance.</p>
+<h2 id="20250315171041-yqct5yz" updated="20250315172107">Q3: Evaluate the model performance</h2>
+<p id="20250315170435-b9oqtbe" updated="20250315171842">After you have successfully run through Q2, the purpose of Q3 is to evaluate and understand the model.</p>
+<h3 id="20250315171842-lvkemv7" updated="20250315172107">Task 1: Compare the performance of different fingerprints</h3>
+<p id="20250315171909-8ys89vc" updated="20250315172031">Compare fingerprints types, length, (and radius). You at least try 2 types of fingerprints and 3 other fingerprint settings.</p>
+<h3 id="20250315172032-rahut2o" updated="20250315211407">Task 2: Compare sigmoid and linear output activation </h3>
+<p id="20250315172801-468noqr" updated="20250315211400">Compare sigmoid and linear output layer activation.</p>
+<p id="20250315170234-owygyon" updated="20250315211407">For linear activation, you don't need to use <span data-type="inline-math" data-subtype="math" data-content="f(x)" contenteditable="false" class="render-node"></span> above as the activation function. Just leave no activation like a typical linear regression task. The model should automatically (if correctly trained) know the values sitting in the range of [0,1]. Just use <span data-type="inline-math" data-subtype="math" data-content="f(x)" contenteditable="false" class="render-node"></span> to make sure the output value is within [0,1]</p>
+<h3 id="20250315165532-2crhppg" updated="20250315211650">Task 3: Compare different model structure</h3>
+<p id="20250315211556-ykjdqer" updated="20250315211627">Compare number of layers and number of nodes for neural network to see how they affect the model performance.</p>
+<h2 id="20250315211645-d1mk6ki" updated="20250315213122">Q4: Case studies</h2>
+<p updated="20250315212355" id="20250315212302-354z6km">Using the best model (most accurate for testing dataset) you obtained above, try the following tasks:</p>
+<h3 id="20250315211650-pub4upk" updated="20250315213122">Task 1: Understand how eluent polarity (composition) affects Rf value</h3>
+<p id="20250315211830-l5e9sfv" updated="20250315213122">Pick 3 molecules (any 3 you like) from the testing dataset. Plotting the experimental and predictive Rf value at different eluent compositions. (similar to the Figure 5 in the original publication)</p>
+<h3 id="20250315211845-4f4l5dh" updated="20260326103021">Task 2: Find the suitable eluent to separate a mixture</h3>
+<p id="20250315212135-as877j7" updated="20250315220546">Typically, in order to have a good separation performance of a mixture, we need to find a suitable eluent composition that the Rf value of the target compound is within 0.2~0.3, and other compounds should have Rf value difference &gt;0.1 compared to target compound. Using this optimized eluent composition for the following column chromatography, we will often get good separation results.</p>
+<p id="20250315220500-f58d3rf" updated="20250315220503">​<span contenteditable="false" data-type="img" class="img" style="min-width: calc(100% - 0.1em);"><span> </span><span style="width: 612px;"><span class="protyle-action protyle-icons"><span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMore"></use></svg></span></span><img src="assets/image-20250315220500-jxkia2s.png" data-src="assets/image-20250315220500-jxkia2s.png" alt="image" /><span class="protyle-action__drag"></span><span class="protyle-action__title"><span></span></span></span><span> </span></span>​</p>
+<p id="20250315172820-z1oq2df" updated="20250315222250">Consider the following two widely used reactions in drug synthesis, we would like separate the product from the reaction crude.</p>
+<p id="20250315220837-h0w326q" updated="20250315222440"><span data-type="strong">Reaction 1: Buchwald-Hartwig cross-coupling reaction</span></p>
+<p id="20250315222219-lkw02p7" updated="20250315223452">Assume the reaction crude (mixture after the reaction) only contains reactant <span data-type="strong">1</span> and product <span data-type="strong">2</span>. Find the right the eluent composition to separate <span data-type="strong">2</span> from <span data-type="strong">1</span>.</p>
+<p id="20250315222141-7dhh88d" updated="20250315222144">​<span contenteditable="false" data-type="img" class="img" style="min-width: calc(100% - 0.1em);"><span> </span><span style="width: 550px;"><span class="protyle-action protyle-icons"><span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMore"></use></svg></span></span><img src="assets/image-20250315222141-p8hrp95.png" data-src="assets/image-20250315222141-p8hrp95.png" alt="image" /><span class="protyle-action__drag"></span><span class="protyle-action__title"><span></span></span></span><span> </span></span>​</p>
+<blockquote id="20250315223314-e4szug9" updated="20250315223407">
+<p id="20250315223318-885496s" updated="20250315223407">Reference: https://en.wikipedia.org/wiki/Buchwald%E2%80%93Hartwig_amination</p>
+</blockquote>
+<p id="20250315164344-nmn5k80" updated="20250315223417"><span data-type="strong">Reaction 2: Suzuki-Miyaura cross-coupling reaction</span></p>
+<p id="20250315223414-kmh4xb2" updated="20250315223454">Similarly, assume the reaction crude (mixture after the reaction) only contains reactant <span data-type="strong">3</span> and product <span data-type="strong">4</span>. Find the right the eluent composition to separate <span data-type="strong">4</span> from <span data-type="strong">3</span>.</p>
+<p id="20250315223304-w8iyhkh" updated="20250315223309">​<span contenteditable="false" data-type="img" class="img" style="min-width: calc(100% - 0.1em);"><span> </span><span style="width: 555px;"><span class="protyle-action protyle-icons"><span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMore"></use></svg></span></span><img src="assets/image-20250315223304-jior755.png" data-src="assets/image-20250315223304-jior755.png" alt="image" /><span class="protyle-action__drag"></span><span class="protyle-action__title"><span></span></span></span><span> </span></span>​</p>
+<blockquote id="20250315223325-mutb7ci" updated="20250315223341">
+<p id="20250315223330-8jcle53" updated="20250315223341">Reference: https://en.wikipedia.org/wiki/Suzuki_reaction</p>
+</blockquote>
+<p id="20250315223509-7k4oqs1" updated="20250315223646">If you don't have ChemDraw software installed, you can use the online molecular drawing tool to draw molecule and obtain its SMILES.</p>
+<p updated="20250315223725" id="20250315223552-5rytfte">https://www.rcsb.org/chemical-sketch</p>
+<p id="20250315223727-qcyxy9e" updated="20250315223909">https://molview.org/  ---- Draw the molecule, then click &quot;Tools--&gt;Information Card&quot;</p>
+<h1 id="20260326103021-12zfdsl" updated="20260326103029">Problem 2: Reaction condition optimization</h1>
+<h2 id="20260326103021-hkikrbb" updated="20250328222142">Problem background</h2>
+<p id="20260326103021-n6z1p4b" updated="20250328222034">In many chemical reactions, one of the main challenges is that undesired side reactions can occur, reducing both the yield and selectivity of the target product. For example, in C–C Suzuki coupling reactions, the desired transformation is the palladium-catalyzed cross-coupling of an aryl halide (<span data-type="strong">A</span>) with an arylboronic acid (<span data-type="strong">B</span>) to form a biaryl product (<span data-type="strong">R</span>). However, under basic aqueous conditions and elevated temperatures, the boronic acid (<span data-type="strong">B</span>) is prone to protodeboronation, a side reaction in which the B–C bond is cleaved to form the corresponding arene (<span data-type="strong">S</span>). This undesired pathway consumes the starting material <span data-type="strong">B</span> and reduces the efficiency of the main coupling reaction.</p>
+<p id="20260326103021-hqo3ur4" updated="20250328221836">To improve the yield of the desired product, reaction conditions such as temperature, reaction time, and catalyst concentration must be carefully optimized to accelerate the main reaction while minimizing the rate of the side reaction.</p>
+<div data-content="\text{A (aryl halide)} + \text{B (boronic acid)} \xrightarrow{\text{Pd catalyst, Base, Heat}} \text{R (biaryl product)}" data-subtype="math" id="20260326103021-k4rpfl9" updated="20250328222005"><div spin="1"></div></div>
+<div data-content="\text{B (boronic acid)} \xrightarrow{\text{Heat, Base}} \text{S (protodeboronation product, e.g., Ar–H)}" data-subtype="math" updated="20250328221656" id="20260326103021-zuemdre"><div spin="1"></div></div>
+<h2 id="20260326103021-hinjakh" updated="20250329154538">Problem statement</h2>
+<p id="20260326103021-lhm2epf" updated="20250329154537">In this problem, we aim to maximize the yield of product <span data-type="strong">R</span> in a simplified kinetic system where two competing reactions occur. These reactions are governed by classical chemical kinetics and involve a desired transformation of reactants <span data-type="strong">A</span> and <span data-type="strong">B</span> to product <span data-type="strong">R</span>, alongside a competing side reaction that consumes reactant <span data-type="strong">B</span> to form an undesired byproduct <span data-type="strong">S</span>. <span data-type="text strong" style="color: var(--b3-font-color1);">Our goal is to maximize the yield of R.</span></p>
+<div data-content="A + B \xrightarrow{k_R} R
+\qquad
+k_R = C_{\text{cat}}^{1/2} A_R e^{-\frac{E_{A_R}}{RT}}" data-subtype="math" id="20260326103021-pvy4ppb" updated="20250329154538"><div spin="1"></div></div>
+<div data-content="B \xrightarrow{k_S} S
+\qquad
+k_S = A_S e^{-\frac{E_{A_S}}{RT}}" data-subtype="math" id="20260326103021-72jxk1o" updated="20250328221656"><div spin="1"></div></div>
+<p id="20260326103021-7hf3h0p" updated="20250328224856"><span data-type="strong">Reaction parameters for this reaction:</span></p>
+<ul start="0" id="20260326103021-a63niug" updated="20250328224806">
+<li id="20260326103021-163iuc3" updated="20250328222628">
+<p id="20260326103021-ru92i9p" updated="20250328222628"><span data-type="inline-math" data-subtype="math" data-content="C_{A0} = 0.167 \text{ M}" contenteditable="false" class="render-node"></span>: Initial concentration of reactant A.</p>
+</li>
+<li id="20260326103021-ceoad5d" updated="20250328222626">
+<p id="20260326103021-9kmmaxi" updated="20250328222626"><span data-type="inline-math" data-subtype="math" data-content="C_{B0} = 0.250 \text{ M}" contenteditable="false" class="render-node"></span>: Initial concentration of reactant B.</p>
+</li>
+<li updated="20250328224743" id="20260326103021-4sw49ju">
+<p id="20260326103021-0ewdnpp" updated="20250328224743"><span data-type="inline-math" data-subtype="math" data-content="A_R = 3.1 \times 10^7 \ L^{1/2} \ mol^{-3/2} \ s^{-1}" contenteditable="false" class="render-node"></span>: Pre-exponential factor for the desired reaction.</p>
+</li>
+<li id="20260326103021-t8tounm" updated="20250328222732">
+<p id="20260326103021-9u2efbz" updated="20250328222732"><span data-type="inline-math" data-subtype="math" data-content="E_{A_R} = 55 \ kJ \ mol^{-1}" contenteditable="false" class="render-node"></span> Activation energy for the formation of R.</p>
+</li>
+<li id="20260326103021-17a2g9n" updated="20250328224757">
+<p id="20260326103021-nlkda03" updated="20250328224757"><span data-type="inline-math" data-subtype="math" data-content="A_S = 1 \times 10^{12} \ L^{1/2} \ mol^{-3/2} \ s^{-1}" contenteditable="false" class="render-node"></span>: Pre-exponential factor for the side reaction.</p>
+</li>
+<li id="20260326103021-199215s" updated="20250328224806">
+<p id="20260326103021-q7tebck" updated="20250328224806"><span data-type="inline-math" data-subtype="math" data-content="E_{A_S} = 100 \ kJ \ mol^{-1}" contenteditable="false" class="render-node"></span>: Activation energy for the side reaction.</p>
+</li>
+</ul>
+<p updated="20250328225122" id="20260326103021-p19n2c9">The reaction conditions can be selected within the following range:</p>
+<table colgroup="||width: 131px;" id="20260326103021-rfp04ky" updated="20250328230219">
+<colgroup><col /><col /><col style="width: 131px;" /></colgroup><thead><tr>
+<th><span data-type="strong">Variables</span></th>
+<th><span data-type="strong">Range</span></th>
+<th><span data-type="strong">Unit</span></th>
+</tr>
+</thead><tbody><tr>
+<td><span data-type="strong">Temperature</span></td>
+<td>[30.0, 110.0]</td>
+<td>°C</td>
+</tr>
+<tr>
+<td><span data-type="strong">Reaction</span> <span data-type="strong">time</span></td>
+<td>[10.0, 100.0]</td>
+<td>min</td>
+</tr>
+<tr>
+<td><span data-type="strong">Catalyst Concentration</span></td>
+<td>[0.835, 4.175]</td>
+<td>mM</td>
+</tr>
+</tbody>
+</table>
+<h2 id="20260326103021-50d8rkg" updated="20250329154045">Q1:  Calculating yield based on reaction kinetics</h2>
+<p id="20260326103021-z8tfpmn" updated="20250329154045">As we learned in the reaction engineering course, we can solve such system using the ODE (ordinary differential equation). Here, we give the following ODE function as follows:</p>
+<pre class="code-block" data-language="Python" id="20260326103021-5i23b16" updated="20250329153243"><code class="hljs">import numpy as np
+from scipy.integrate import odeint # 你可能需要装scipy, pip install scipy
+
+# Define the kinetic reaction model function
+def kinetics(condition):
+    &quot;&quot;&quot;
+    Computes the yield of the desired product in the competing side reaction.
+    Parameters:
+    - condition: A list containing [T, tre, Ccat] where:
+        - T: Temperature (°C)
+        - tre: Reaction time (min)
+        - Ccat: Catalyst concentration (mM)
+    Returns:
+    - yield_R: The yield of the desired product R
+    &quot;&quot;&quot;
+    # Initial concentrations for reactants (in molarity, M)
+    CA0 = 0.167  # Initial concentration of reactant A (M)
+    CB0 = 0.250  # Initial concentration of reactant B (M)
+  
+    # Reaction parameters for the main reaction and the competing side reaction
+    AR = 3.1e7   # Pre-exponential factor for the main reaction (L^(1/2) mol^(−3/2) s^(−1))
+    EAR = 55     # Activation energy for the main reaction (kJ/mol)
+    EAS = 100    # Activation energy for the side reaction (kJ/mol)
+    As = 1e12    # Pre-exponential factor for the side reaction (L^(1/2) mol^(−3/2) s^(−1))
+  
+    # Unpack the conditions: Temperature (°C), residence time (min), and catalyst concentration (mM)
+    T = condition[0]
+    tre = condition[1]
+    Ccat = condition[2]
+
+    # Unit conversions:
+    T = T + 273.15     # Convert temperature from Celsius to Kelvin
+    tre = tre * 60     # Convert residence time from minutes to seconds
+    Ccat = Ccat / 1000 # Convert catalyst concentration from mM to g/L
+
+    # Compute the rate constants using the Arrhenius equation
+    R = 8.314 # gas constant R J/(mol*K)
+    kr = Ccat ** 0.5 * AR * np.exp(-EAR / (T * R / 1000))  # Rate constant for the main reaction
+    ks = As * np.exp(-EAS / (T * R / 1000))                # Rate constant for the side reaction
+
+    # Define the system of ODEs representing the reaction kinetics
+    def reaction(w, time):
+        # Unpack concentrations: a = [A], b = [B], c = [Product R], d = [Side product S]
+        a, b, c, d = w
+  
+        # Define the rate of change of each species:
+        f1 = -kr * a * b             # Consumption rate of reactant A (only in the main reaction)
+        f2 = -kr * a * b - ks * b    # Consumption rate of reactant B (in both main and side reactions)
+        f3 = kr * a * b              # Formation rate of product R (main reaction)
+        f4 = ks * b                  # Formation rate of side product S (side reaction)
+        return [f1, f2, f3, f4]
+
+    # Create a time array for numerical integration
+    # The simulation runs from 0 to tre/10 seconds with small time steps of 0.001 s.
+    # Note: Using tre/10 is a modeling choice that may represent a fraction of the full residence time.
+    time = np.arange(0, tre / 10, 0.001)
+  
+    # Solve the ODE system with the given initial conditions:
+    # [A] starts at CA0, [B] starts at CB0, and both products [R] and [S] start at 0.
+    re = odeint(reaction, (CA0, CB0, 0.0, 0.0), time)
+  
+    # Extract the final concentration of product R from the simulation results.
+    # re[-1, :] gives the last time point; the third element (index 2) corresponds to [R].
+    cr = re[-1, :][2]
+  
+    # Compute the yield of product R relative to the initial concentration of reactant A
+    y = cr / CA0
+  
+    # Round the computed yield to 4 decimal places
+    yield_R = round(y, 4)
+    return yield_R
+</code></pre>
+<p id="20260326103021-3dvp20b" updated="20250328231833"><span data-type="strong">Task 1:</span> Plot the reaction yield vs. reaction time when temperature is 60 °C and catalyst concentration is 3 mM.</p>
+<p id="20260326103021-vej2i2v" updated="20250328231838"><span data-type="strong">Task 2:</span> Plot the reaction yield vs. temperature when reaction time is 40 min and catalyst concentration is 3 mM.</p>
+<p id="20260326103021-kmr8zaf" updated="20250328231840"><span data-type="strong">Task 3:</span> Plot the reaction yield vs. catalyst concentration when temperature is 60 °C and reaction time is 40 min.</p>
+<h2 id="20260326103021-iof74lf" updated="20250329151325">Q2:  Construct Gaussian process using Matérn52 kernel</h2>
+<p id="20260326103021-fk73y1d" updated="20250328232603">In class, we learned <span data-type="strong">Radial Basis Function (RBF) Kernel.</span> In this problem, we use the <span data-type="strong">Matérn-52 kernel</span>.  The Matérn-52 kernel function is given by:</p>
+<div data-content="k(x_i, x_j) = \sigma_f^2 \left(1 + \frac{\sqrt{5} d}{l} + \frac{5 d^2}{3l^2} \right) e^{-\frac{\sqrt{5} d}{l}}" data-subtype="math" updated="20250328221656" id="20260326103021-qu05rnd"><div spin="1"></div></div>
+<p id="20260326103021-t6kgssr" updated="20250328221656">where:</p>
+<ul start="0" id="20260326103021-ty6omoo" updated="20250328221656">
+<li id="20260326103021-45onkj7" updated="20250328232459">
+<p id="20260326103021-jrrxvd1" updated="20250328232459"><span data-type="inline-math" data-subtype="math" data-content="d = ||\mathbf{x_i} - \mathbf{x_j}||" contenteditable="false" class="render-node"></span> is the Euclidean distance between two points.</p>
+</li>
+<li id="20260326103021-yudsjji" updated="20250328221656">
+<p id="20260326103021-06u035s" updated="20250328221656"><span data-type="inline-math" data-subtype="math" data-content="l" contenteditable="false" class="render-node"></span> (length scale) controls how far the influence of each training point extends.</p>
+</li>
+<li id="20260326103021-s23dkj3" updated="20250328221656">
+<p id="20260326103021-dr41w45" updated="20250328221656"><span data-type="inline-math" data-subtype="math" data-content="\sigma_f" contenteditable="false" class="render-node"></span> (signal variance) determines the vertical variation of the function.</p>
+</li>
+</ul>
+<pre class="code-block" data-language="Python" id="20260326103021-mcubuhv" updated="20250329151325"><code class="hljs">import numpy as np
+from scipy.spatial.distance import cdist
+def matern52_kernel(x1, x2, sigma_f, length_scale):
+    &quot;&quot;&quot;
+    Compute the Matérn 52 kernel between two sets of points.
+    Parameters:
+    - X1: First set of points (N1 x d).
+    - X2: Second set of points (N2 x d).
+    - length_scale: Controls the smoothness of the function.
+    - sigma_f: Signal variance (determines function magnitude).
+    Returns:
+    - Kernel matrix of shape (N1 x N2).
+    &quot;&quot;&quot;
+    if x1.ndim == 1:
+        x1 = x1.reshape(-1, 1)
+    if x2.ndim == 1:
+        x2 = x2.reshape(-1, 1)
+    dists = cdist(x1, x2, 'euclidean')
+    term1 = (1 + np.sqrt(5) * dists / length_scale + (5 * dists ** 2) / (3 * length_scale ** 2))
+    matern52 = sigma_f ** 2 * term1 * np.exp(-np.sqrt(5) * dists / length_scale)
+    return matern52
+</code></pre>
+<p id="20260326103021-wspiwl2" updated="20250329115843"><span data-type="strong">Task:</span> Use the code in Section &quot;Demo: using GP to regress a function&quot;  in the “BayesianOpt.ipynb” demonstrated in class. Replace the kernel function from RBF kernel to Matérn-52 kernel, and compare their difference in the task of regressing the noisy y=sin(x).</p>
+<blockquote id="20260326103021-imcdizx" updated="20250329151300">
+<p id="20260326103021-uwbta6v" updated="20250329151300"><span data-type="strong">The difference between the two kernels:</span></p>
+<p id="20260326103021-lq6lc9d" updated="20250329151255">The RBF kernel enforces high smoothness, while the Matérn 52 kernel provides a compromise between smoothness and flexibility by allowing for rougher behavior in the modeled function.</p>
+</blockquote>
+<h2 id="20260326103021-914jwjj" updated="20250329153227">Q3: Try the Design of Experiments sampling method </h2>
+<p id="20260326103021-ctyd0gv" updated="20250329151703">As we learned in class, for Bayesian optimization, we need to start with some data points. In the demo code provided in class, we can use randomly sampled data points or evenly distributed data points. In this problem, we would like to initialize the Bayesian optimization using <span data-type="strong">Design of Experiments (DOE)</span> methods. DOE is theoretically more reliable way to sample the unknown space. You can use the DOE method as the following code:</p>
+<pre class="code-block" data-language="python" id="20260326103021-cinbob3" updated="20250329152849"><code class="hljs"># pip install pyDOE before using this code
+import numpy as np
+from pyDOE import lhs  # install pyDOE
+
+def generate_doe(bounds, num_samples):
+    &quot;&quot;&quot;
+    Generate DOE samples using Latin Hypercube Sampling (LHS) and optionally evaluate them.
+    Parameters:
+    bounds : np.ndarray
+        A 2D array of shape (n_parameters, 2) where each row specifies the lower and upper
+        bound for a parameter.
+    num_samples : Number of DOE samples to generate.
+    Returns:
+    X : np.ndarray
+        DOE sampled points scaled to the provided bounds.
+    &quot;&quot;&quot;
+    num_params = bounds.shape[0]
+  
+    # Generate normalized LHS samples (each value in [0, 1])
+    normalized_samples = lhs(num_params, samples=num_samples)
+  
+    # Scale samples to the actual search space defined by bounds
+    X = normalized_samples * (bounds[:, 1] - bounds[:, 0]) + bounds[:, 0]
+    return X
+
+# Define parameter search space (each row: [lower_bound, upper_bound])
+bounds = np.array([
+    [30, 110],      # Temperature (°C)
+    [10, 100],      # Reaction time (min)
+    [0.835, 4.175]  # Catalyst concentration (mM)
+])
+
+# Determine the number of parameters and initial samples
+num_params = bounds.shape[0]
+num_initial_samples = 5
+
+# Generate DOE sample points 
+X_train = generate_doe(bounds, num_initial_samples)
+</code></pre>
+<p id="20260326103021-1hgquuk" updated="20250329153227"><span data-type="strong">Task:</span> Try this sampling method, and plotting the sampled points in the 3D plot (The code is already provided in the jupyter notebook.)</p>
+<blockquote id="20260326103021-as823un" updated="20250329153146">
+<p id="20260326103021-8ydn0iw" updated="20250329153146">You may notice the sampled points are different each time. This is because:</p>
+<p id="20260326103021-a1t1r41" updated="20250329153138">Latin Hypercube Sampling (LHS) is inherently a stochastic (random) method, meaning it generates random sample points that are spread out evenly over the parameter space. As a result, each time you call the LHS function without fixing the random seed, you'll get different sample points.</p>
+</blockquote>
+<h2 id="20260326103021-una2m60" updated="20250329174648">Q4: Bayesian Optimization to find the reaction condition to maximize the yield of species R</h2>
+<p id="20260326103021-2ytxj86" updated="20250329173921">Follow the sample code discussed in class, you can set up a Bayesian Optimization using the Expected Improvement (EI) acquisition function. </p>
+<p id="20260326103021-x38iw5a" updated="20250329174648"><span data-type="strong">Task:</span> Your main job is understanding the behavior of optimization on the final optimal condition and yield.</p>
+<h2 id="20260326103021-lxn3oi6" updated="20250329164101"></h2>
+</div>
+<script src="appearance/icons/material/icon.js?v=3.5.7"></script><script src="appearance/icons/Remix-icon/icon.js?v=3.5.7"></script>
+<script src="stage/build/export/protyle-method.js?v=3.5.7"></script>
+<script src="stage/protyle/js/lute/lute.min.js?v=3.5.7"></script>  
+<script>
+    
+    window.siyuan = {
+      config: {
+        appearance: { mode: 1, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+        editor: { 
+          codeLineWrap: true,
+          fontSize: 16,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: false,
+          katexMacros: decodeURI(`%7B%7D`),
+        }
+      },
+      languages: {copy:"复制"}
+    };
+    const previewElement = document.getElementById('preview');
+    Protyle.highlightRender(previewElement, "stage/protyle");
+    Protyle.mathRender(previewElement, "stage/protyle", false);
+    Protyle.mermaidRender(previewElement, "stage/protyle");
+    Protyle.flowchartRender(previewElement, "stage/protyle");
+    Protyle.graphvizRender(previewElement, "stage/protyle");
+    Protyle.chartRender(previewElement, "stage/protyle");
+    Protyle.mindmapRender(previewElement, "stage/protyle");
+    Protyle.abcRender(previewElement, "stage/protyle");
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, "stage/protyle");
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+            navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd().replace(/ /g, " ").replace(/‍```/g, "```"));
+            event.preventDefault();
+            event.stopPropagation();
+      })
+    });
+</script>
+</body></html>

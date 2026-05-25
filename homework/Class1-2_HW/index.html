@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="dark" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+    <base href="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" id="baseStyle" href="stage/build/export/base.css?v=3.5.7"/>
+    <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="appearance/themes/midnight/theme.css?v=3.5.7"/>
+    <script src="stage/protyle/js/protyle-html.js?v=3.5.7"></script>
+    
+    <title>ML Class 1-2 Homework</title>
+    <!-- Exported by SiYuan v3.5.7 -->
+    <style>
+        body {font-family: var(--b3-font-family);background-color: var(--b3-theme-background);color: var(--b3-theme-on-background)}
+        @font-face {
+  font-family: "Emojis Additional";
+  src: url(appearance/fonts/Noto-COLRv1-2.047/Noto-COLRv1.woff2) format("woff2");
+  unicode-range: U+1fae9, U+1fac6, U+1fabe, U+1fadc, U+e50a, U+1fa89, U+1fadf, U+1f1e6-1f1ff, U+1f3f4, U+e0067, U+e0062,
+  U+e0065, U+e006e, U+e007f, U+e0073, U+e0063, U+e0074, U+e0077, U+e006c;
+  size-adjust: 85%;
+}
+@font-face {
+  font-family: "Emojis Reset";
+  src: local("Segoe UI Emoji"),
+  local("Segoe UI Symbol");
+  unicode-range: U+263a, U+21a9, U+2642, U+303d, U+2197, U+2198, U+2199, U+2196, U+2195, U+2194, U+2660, U+2665, U+2666, 
+  U+2663, U+3030, U+21aa, U+25b6, U+25c0, U+2640, U+203c, U+a9, U+ae, U+2122;
+  size-adjust: 85%;
+}
+@font-face {
+  font-family: "Emojis";
+  src: local("Segoe UI Emoji"),
+  local("Segoe UI Symbol");
+  size-adjust: 85%;
+}
+:root { --b3-font-size-editor: 16px }
+.b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: none }
+        
+        
+    </style>
+    <style id="snippetCSS20240908213950-5chvo6d">/*══════════  COLOURS & COMBINED FONT STACKS  ══════════*/
+:root {
+  /* Light theme */
+  --h1-clr: #ff6b81;   /* ruby red */
+  --h2-clr: #90a8ff;   /* royal blue */
+
+  /* Font stacks: Arial first for Latin, Chinese fonts for Han glyphs */
+  --font-yahei: "Arial", "微软雅黑", "Microsoft YaHei",
+                "PingFang SC", "Noto Sans CJK SC", sans-serif;
+
+  --font-kaiti: "Arial", "楷体", "KaiTi", "STKaiti", "KaiTi SC", serif;
+  --font-song:  "Arial", "宋体", "SimSun", serif;
+}
+
+/* Dark theme tints */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --h1-clr: #ff6b81;  /* rose ruby */
+    --h2-clr: #90a8ff;  /* royal blue 300 */
+  }
+}
+
+/*══════════  SHARED HEADING PROPS  ══════════*/
+h1, h2, h3, h4,
+.h1, .h2, .h3, .h4 {
+  margin: 0 0 0.7em;
+  line-height: 1.3;
+  scroll-margin-top: 5rem;           /* smooth anchor jumps */
+}
+
+/*══════════  H1  ══════════*/
+h1, .h1 {
+  font-family: var(--font-yahei);
+  font-size: clamp(2.8rem, 5vw + 0.8rem, 3.4rem); /* ≈45–54 px */
+  font-weight: 800;
+  color: var(--h1-clr);
+  letter-spacing: 0.5px;
+}
+
+/*══════════  H2  ══════════*/
+h2, .h2 {
+  font-family: var(--font-yahei);
+  font-size: clamp(2.2rem, 4vw + 0.5rem, 2.8rem); /* ≈34–45 px */
+  font-weight: 700;
+  color: var(--h2-clr);
+}
+
+/*══════════  H3  ══════════*/
+h3, .h3 {
+  font-family: var(--font-kaiti);
+  font-size: 1.625rem;               /* 26 px */
+  font-weight: 700;
+  color: inherit;                    /* follows body colour */
+}
+
+/*══════════  H4  (text underline)  ══════════*/
+h4, .h4 {
+  font-family: var(--font-song);
+  font-size: 0.75rem;                /* 20 px */
+  font-weight: 500;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;     /* slight gap below text */
+  text-decoration-thickness: 0.75px;    /* crisp 2 px line */
+}
+</style>
+</head>
+<body>
+<div class="b3-typography" 
+style="max-width: 800px;margin: 0 auto;" id="preview"><h1 id="ML-Class-1-2-Homework" title="ML Class 1-2 Homework" updated="20260308171835">ML Class 1-2 Homework</h1>
+<h1 id="20250219140132-naaw7ce" updated="20260308170829">Problem 1: Implement a General Gradient Descent Algorithm</h1>
+<p id="20250219140132-9wiyc7e" updated="20250219140607">The simplest and most commonly referred-to method of optimization for differentiable cost functions is gradient descent (as discussed in class). It’s worth understanding its behavior on actual problems. In this question, you will implement two of its most important forms: batch gradient descent and stochastic gradient descent (SGD).</p>
+<h2 id="20250219144458-li3ww2g" updated="20260308170829">Q1: Warm up: construct a generic gradient descent function</h2>
+<p id="20250219144457-fugkf6w" updated="20250219154011">Implement a basic gradient descent procedure (a Python function) to minimize a scalar function (y is a scalar) of a vector inputs (<span data-type="strong">x</span> is vector).</p>
+<p id="20250219144517-rfnp5yx" updated="20250221225804">Write it generically so that you can easily specify the objective function, gradient function, initial guess, step size, and the convergence criterion (use when the difference in objective function value on two successive steps is below a threshold). For this question, you can use a fixed step size in your implementation.</p>
+<p id="20250222173007-rb8dsva" updated="20250222173012">Provide code in the homework.</p>
+<pre class="code-block" data-language="python" id="20250219154022-iakwwtc" style="line-height: 22px;" updated="20260308170829"><code class="hljs">def gd_function(obj, grad, init_guess, step_size, epsilon, max_iter=100):
+    &quot;&quot;&quot;
+    Gradient Descent Function to minimize an objective function.
+
+    Parameters:
+    - obj: Objective function to minimize (must take a vector
+      as input and return a scalar).
+    - grad: Gradient function of the objective function
+      (returns a vector of gradients).
+    - init_guess: Initial guess for the parameters (a vector).
+    - step_size: The step size (learning rate) for the gradient descent updates.
+    - epsilon: The stopping criterion (the algorithm stops
+      when the difference in objective function value on two
+      successive steps is below a threshold).
+    - max_iter: Maximum number of iterations to prevent infinite loops.
+
+    Returns:
+    - opt_point: The vector of parameters that minimize the objective function.
+    &quot;&quot;&quot;
+    
+    # your code here ....
+
+    return opt_point
+
+</code></pre>
+<h2 id="20250219145645-i7yzt5s" updated="20260308171228">Q2: Use GD function from Q1 to optimize a Gaussian function</h2>
+<p id="20250219144536-ii4yk48" updated="20260308171228">Test your gradient descent procedure on two functions: the negative of a Gaussian function and a quadratic bowl. You need to at least finish the following tasks:</p>
+<ul start="0" id="20260308171013-0ao38zz" updated="20260308171013">
+<li id="20260308171013-9qu4a4u" updated="20260308171013">
+<p id="20260308171013-rcalxoc" updated="20260308171033">Discuss (and illustrate) the effect of the choice of starting guess, the step size, and the convergence criterion on the resulting solution.</p>
+</li>
+<li id="20260308171019-9loe4aj" updated="20260308171019">
+<p id="20260308171019-de6cedh" updated="20260308171021">How the norm of the gradient evolves through the iteration.</p>
+</li>
+<li id="20260308171035-t12rsb9" updated="20260308171035">
+<p id="20260308171035-5uwavfp" updated="20260308171035">Plot how the algorithm iteratively finds the optimal point.</p>
+</li>
+</ul>
+<h3 id="20250219150142-7coefw2" updated="20250221225622">A negative Gaussian function</h3>
+<div data-content="f(x) = - \frac{1}{\sqrt{(2\pi)^n |\Sigma|}} \exp \left[ - \frac{1}{2} (x - u)^T \Sigma^{-1} (x - u) \right]" data-subtype="math" id="20250219145946-l60ss5c" updated="20250221225444"><div spin="1"></div></div>
+<p id="20250219150142-wfczld0" updated="20250219214913">Its derivative can be written as:</p>
+<div data-content="\frac{\partial f(x)}{\partial x} = - f(x) \Sigma^{-1} (x - u)" data-subtype="math" id="20250219150201-3xeovfl" updated="20250219214925"><div spin="1"></div></div>
+<p id="20250219214926-pf4ode3" updated="20250219214942">The parameters are:</p>
+<div data-content="u=\begin{bmatrix}
+	10\\
+	 10
+\end{bmatrix} \quad
+\Sigma=\begin{bmatrix}
+	1000 &amp; 0 \\
+	0 &amp; \ 1000
+\end{bmatrix}
+\quad n=2" data-subtype="math" id="20250219214942-68mq50t" updated="20250221225622"><div spin="1"></div></div>
+<h3 id="20250219150208-69alfax" updated="20250219215630">A quadratic bowl function</h3>
+<p updated="20250219215407" id="20250219215407-w06nnd3"><span data-type="inline-math" data-subtype="math" data-content="A" contenteditable="false" class="render-node"></span> being a positive definite matrix:</p>
+<div data-content="f(x) = \frac{1}{2} x^T A x - x^T b" data-subtype="math" id="20250219150248-h9iri18" updated="20250219214915"><div spin="1"></div></div>
+<p id="20250219150223-38lrdzf" updated="20250219214915">Its derivative can be written as:</p>
+<div data-content="\frac{\partial f(x)}{\partial x} = A x - b" data-subtype="math" id="20250219150242-jkt6fsq" updated="20250219215419"><div spin="1"></div></div>
+<p id="20250219215420-456sevr" updated="20250219215423">The parameters are:</p>
+<div data-content="A=\begin{bmatrix}
+	10 &amp; 5 \\
+	5 &amp; \ 10
+\end{bmatrix}
+\quad
+b=\begin{bmatrix}
+	400  \\
+	 400
+\end{bmatrix}" data-subtype="math" id="20250219215424-pdzosha" updated="20250219215630"><div spin="1"></div></div>
+<h2 id="20250219150310-sz1wc5h" updated="20260308171835">Q3: Numerical gradient</h2>
+<p id="20260308171659-4y4674a" updated="20260308171851">The gradient function may not always look as simple and clean as the ones provided above. A common way to use the central difference approximation to numerically evaluate the gradient at various points.</p>
+<blockquote id="20260308171854-vofrncd" updated="20260308171859">
+<p id="20260308171858-821g7tg" updated="20260308171859">https://en.wikipedia.org/wiki/Finite_difference</p>
+</blockquote>
+<p updated="20260308171659" id="20260308171659-cjlq9z4">The equation for the partial derivative with respect to the $i$-th parameter is given by:</p>
+<div data-content="\frac{\partial f(x)}{\partial x_i} \approx \frac{f(x + \epsilon e_i) - f(x - \epsilon e_i)}{2\epsilon}" data-subtype="math" id="20260308171659-zh2tl8r" updated="20260308171739"><div spin="1"></div></div>
+<p id="20260308171658-unfhheu" updated="20260308171835">where <span data-type="inline-math" data-subtype="math" data-content="e_i" contenteditable="false" class="render-node"></span> is a basis vector (all zeros except for a 1 at the i-th position) and <span data-type="inline-math" data-subtype="math" data-content="\epsilon" contenteditable="false" class="render-node"></span> is a small scalar value.</p>
+<p id="20250219150809-gvt7yrq" updated="20260308171202"><span data-type="strong">Only need to use the</span> <span data-type="strong text" style="background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);">negative Gaussian function</span> <span data-type="strong">as the target in Q3 problem.</span></p>
+<p id="20260308171206-z9hcoep" updated="20260308171219">You need to at least finish the following tasks:</p>
+<ol id="20250219150359-s7d2ozh" updated="20250223130033">
+<li id="20250219150736-igdr270" updated="20250219150736">
+<p id="20250219150736-qg1u7aw" updated="20250219150736">Write code to approximate the gradient of a function numerically at a given point using this method.</p>
+</li>
+<li id="20250219150740-gjo554l" updated="20250219150740">
+<p updated="20250219150740" id="20250219150740-zsp50aa">Compare the gradient values on the functions you used in the question above by comparing the analytical and numerical gradients at various points. </p>
+</li>
+<li id="20250219150928-52jx54d" updated="20250223130033">
+<p id="20250219150928-74wk1lq" updated="20250223130033">Use numerical gradient to do gradient descent to find the minimal point of the negative Gaussian function. </p>
+</li>
+</ol>
+<h1 id="20250219151337-7an5deh" updated="20260308172315">Problem 2: Implement Stochastic Gradient Descent (SGD)</h1>
+<p id="20250219140325-hhyn9gz" updated="20250219151627">In machine learning, batch gradient descent uses samples from the full training set for each parameter update. Thus, each iteration would be slow for a large dataset. In addition, the native form of batch gradient descent does not provide a way to incorporate new data efficiently.</p>
+<p id="20250219151628-13n91mb" updated="20260308172239">Stochastic gradient descent (SGD) addresses these problems by using stochastic approximation on the gradient term (as discussed in class). In this question, we will use both batch gradient descent and SGD on a least square fitting problem.</p>
+<p id="20250219140325-vrt4yk8" updated="20260308172315">The dataset is provided in <span data-type="code">fittingdatap.x.txt</span> and <span data-type="code">fittingdatap.y.txt</span>. Each row of <span data-type="inline-math" data-subtype="math" data-content="X" contenteditable="false" class="render-node"></span> and <span data-type="inline-math" data-subtype="math" data-content="y" contenteditable="false" class="render-node"></span> represents a single data sample pair <span data-type="inline-math" data-subtype="math" data-content="(x^{(i)}, y^{(i)})" contenteditable="false" class="render-node"></span>.</p>
+<p id="20250222163455-s7nafnp" updated="20250222163455">Your goal is to find a coefficient vector <span data-type="inline-math" data-subtype="math" data-content="\theta" contenteditable="false" class="render-node"></span> that minimizes the least square error:</p>
+<div data-content="J(\theta) = \| X\theta - y \|^2  = \sum_i (x^{(i)T} \theta - y^{(i)})^2" data-subtype="math" updated="20250219153720" id="20250219151951-1ugafpg"><div spin="1"></div></div>
+<p id="20250219153722-06q93i0" updated="20250219153722">Use SGD to perform a parameter update based on a single training example:</p>
+<div data-content="\theta_{t+1} = \theta_t - \eta_t \nabla \theta J(\theta_t; x^{(i)}, y^{(i)})" data-subtype="math" id="20250219153722-zgcnlt2" updated="20250219153722"><div spin="1"></div></div>
+<p id="20250219153722-dfnzqox" updated="20250219153722">where <span data-type="inline-math" data-subtype="math" data-content="\eta_t" contenteditable="false" class="render-node"></span> is the learning rate for each iteration <span data-type="inline-math" data-subtype="math" data-content="t = 1, 2, \dots" contenteditable="false" class="render-node"></span> and <span data-type="inline-math" data-subtype="math" data-content="J(\theta_t; x^{(i)}, y^{(i)}) = (x^{(i)T} \theta_t - y^{(i)})^2" contenteditable="false" class="render-node"></span> is the objective function in terms of a single data sample.</p>
+<h2 id="20250219153423-3b2kiuu" updated="20250219154351">Q1: Batch gradient descent</h2>
+<p id="20250219153344-thistai" updated="20250219154351">Use batch gradient descent on <span data-type="inline-math" data-subtype="math" data-content="J(\theta)" contenteditable="false" class="render-node"></span> with a fixed step size. This would be the case where the gradient of the cost function for the entire training dataset is used in each parameter update.</p>
+<h2 id="20250219153445-c7swktu" updated="20260308173619">Q2: Stochastic gradient descent</h2>
+<p id="20250219153707-x12anuz" updated="20250219154940">Write a general procedure that performs SGD on this dataset. You should first derive the point-wise (with respect to a single data sample) gradient function, <span data-type="inline-math" data-subtype="math" data-content="\nabla_\theta J(\theta_t; x^{(i)}, y^{(i)})" contenteditable="false" class="render-node"></span>. Then write a procedure to perform parameter update by iterating through the samples in the dataset for some number of rounds until a stopping criterion is reached (here use the convergence of the full objective function over all data points is reached, just like the batch gradient descent).</p>
+<p id="20250219140331-w942cwy" updated="20250219154953"><span data-type="strong">Tip:</span> In order to have a guaranteed convergence for SGD, the learning rate <span data-type="inline-math" data-subtype="math" data-content="\eta_t" contenteditable="false" class="render-node"></span> for <span data-type="inline-math" data-subtype="math" data-content="t" contenteditable="false" class="render-node"></span> can be chosen to satisfy the <span data-type="strong">Theorem 2</span> as shown in class. <span data-type="text" style="font-family: var(--b3-font-family-protyle); background-color: var(--b3-theme-background); color: var(--b3-theme-on-background);">An example of this is to choose </span><span data-type="inline-math" data-subtype="math" data-content="\eta_t = (\tau_0 + t)^{-\kappa}" contenteditable="false" class="render-node" style="font-family: var(--b3-font-family-protyle); background-color: var(--b3-theme-background); color: var(--b3-theme-on-background);"></span><span data-type="text" style="white-space: break-spaces; text-align: justify; font-family: var(--b3-font-family-protyle); font-size: 16px; font-variant-ligatures: no-common-ligatures; background-color: var(--b3-theme-background); color: var(--b3-theme-on-background); display: inline !important; float: none;"> for constants </span><span data-type="inline-math" data-subtype="math" data-content="\tau_0 \geq 0" contenteditable="false" class="render-node" style="white-space: break-spaces; text-align: justify; font-family: var(--b3-font-family-protyle); font-size: 16px; font-variant-ligatures: no-common-ligatures; background-color: var(--b3-theme-background); color: var(--b3-theme-on-background);"></span><span data-type="text" style="white-space: break-spaces; text-align: justify; font-family: var(--b3-font-family-protyle); font-size: 16px; font-variant-ligatures: no-common-ligatures; background-color: var(--b3-theme-background); color: var(--b3-theme-on-background); display: inline !important; float: none;"> and </span><span data-type="inline-math" data-subtype="math" data-content="\kappa \in (0.5, 1)" contenteditable="false" class="render-node" style="white-space: break-spaces; text-align: justify; font-family: var(--b3-font-family-protyle); font-size: 16px; font-variant-ligatures: no-common-ligatures; background-color: var(--b3-theme-background); color: var(--b3-theme-on-background);"></span><span data-type="text" style="white-space: break-spaces; text-align: justify; font-family: var(--b3-font-family-protyle); font-size: 16px; font-variant-ligatures: no-common-ligatures; background-color: var(--b3-theme-background); color: var(--b3-theme-on-background); display: inline !important; float: none;">.</span></p>
+<pre class="code-block" data-language="python" id="20250219155738-7j519gs" style="line-height: 22px;" updated="20260308173619"><code class="hljs"># Stochastic Gradient Descent (SGD)
+def sgd_function(obj, grad, data, init_guess, step_size, epsilon, max_epoch=100):
+    &quot;&quot;&quot;
+    Stochastic Gradient Descent (SGD) Function to minimize an objective function.
+
+    Parameters:
+    - obj: Objective function to minimize (evaluates over the full dataset).
+    - grad: Point-wise gradient function of the objective function.
+    - data: Dataset used for stochastic updates, typically a tuple (X, y).
+    - init_guess: Initial guess for the parameters (a vector).
+    - step_size: A function that calculates the learning rate for a given iteration t.
+    - epsilon: The stopping criterion (e.g., convergence of the full objective function).
+    - max_epoch: Maximum number of epochs (passes over the entire dataset) to prevent infinite loops.
+
+    Returns:
+    - opt_point: The vector of parameters that minimize the objective function.
+    &quot;&quot;&quot;
+   
+    # your code here ....
+
+    return opt_point
+</code></pre>
+<h2 id="20250219155001-jxwxepj" updated="20250219155335">Q3: Comparison between batch and stochastic GD</h2>
+<p id="20250219155232-yb45bd1" updated="20250219155335">Plot the full objective function vs. iteration number for both batch and stochastic gradient descent methods. Compare the behavior of the two implementations in terms of accuracy and number of evaluations of the point-wise gradient.</p>
+<h2 id="20250219155021-1k4ttcl" updated="20260308174432">Q4: Mini-batch gradient descent (optional, 感兴趣的选做)</h2>
+<p id="20250219140337-n9pv5lg" updated="20250219155422">You may notice that SGD does not strictly descent at every iteration and may have large &quot;jumps&quot;. An in-between method is the mini-batch gradient descent, which uses a subset of training samples for parameter update in a stochastic setting and can smooth out these large &quot;jumps&quot;.</p>
+<p id="20250219155432-lzypsni" updated="20250219155550">Construct a mini-batch gradient descent function. Please note that you can specify how many data points (<span data-type="strong">n</span>) used in a mini-batch (when <span data-type="inline-math" data-subtype="math" data-content="n=1" contenteditable="false" class="render-node"></span>, it is SGD).</p>
+<p updated="20250219155520" id="20250219155431-12rbfxx">Does the convergence become &quot;smoother&quot; as you would expect compared to the case of SGD?</p>
+<pre class="code-block" data-language="python" id="20250219155910-wk3ko54" style="line-height: 22px;" updated="20260308173805"><code class="hljs"># Mini-batch Gradient Descent
+def minibatch_gd_function(obj, grad, data, init_guess, step_size, epsilon, n_batch=32, max_epoch=100):
+    &quot;&quot;&quot;
+    Mini-batch Gradient Descent Function to minimize an objective function.
+
+    Parameters:
+    - obj: Objective function to minimize (evaluates over the full dataset).
+    - grad: Gradient function of the objective function (evaluates over a mini-batch).
+    - data: Dataset used for stochastic updates, typically a tuple (X, y).
+    - init_guess: Initial guess for the parameters (a vector).
+    - step_size: A function that calculates the learning rate for a given iteration t.
+    - epsilon: The stopping criterion (e.g., convergence of the full objective function).
+    - n_batch: The size of each mini-batch.
+    - max_epoch: Maximum number of epochs (passes over the entire dataset) to prevent infinite loops.
+
+    Returns:
+    - opt_point: The vector of parameters that minimize the objective function.
+    &quot;&quot;&quot;
+    
+    # your code here ....
+
+    return opt_point
+</code></pre>
+<h1 id="20260308174432-3l3t627" updated="20260310232721">Problem 3: Handwritten Digit Recognition with MNIST</h1>
+<p id="20260308174432-dxnorzj" updated="20260308174450">In this problem, we will apply neural network to automatically classify images of hand-written digits from the famous MNIST dataset (https://en.wikipedia.org/wiki/MNIST_database).</p>
+<p id="20260308174432-a4vgujq" updated="20250225174040">The MNIST dataset is provided as a CSV file. Each line in CSV is one data point. The first number is the digit label (e.g., 1, 2, 3 ...), and the next 784 numbers are pixel grayscale levels (0, 255) for 28*28 image. In the 784 numbers, the first 28 columns (1-28) represent the first row of the image, the second 28 columns (29-56) represent the second row of the image, and so on. The digits look like the following:</p>
+<p id="20260308174432-ukk918o" updated="20250225173009">​<span contenteditable="false" data-type="img" class="img" style="min-width: calc(100% - 0.1em);"><span> </span><span style="width: 300px;"><span class="protyle-action protyle-icons"><span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMore"></use></svg></span></span><img src="assets/image-20250225173005-4g6ulb0.png" data-src="assets/image-20250225173005-4g6ulb0.png" alt="image" /><span class="protyle-action__drag"></span><span class="protyle-action__title"><span></span></span></span><span> </span></span>​</p>
+<p id="20260308174432-dqgsfxy" updated="20250226003552">Even though the image is 28<span data-type="em">28, you can just use the flat 784-dimension vector as the input. The model will learn the relationship among the flat vector input to understand which number it is. The more advanced way of processing image type input is convolutional neural network, which considers the image as a 28</span>28 data type input. However, this is out of the scope of this course.</p>
+<blockquote id="20260310232635-fgfu5qt" updated="20260310232648">
+<p id="20260310232627-v698cjq" updated="20260310232648">If you are interested in <span data-type="em">convolutional neural network</span>, you can refer to https://en.wikipedia.org/wiki/Convolutional_neural_network.</p>
+</blockquote>
+<p id="20260308174432-mkwjsf1" updated="20250226003657">You can use the &quot;HW2_background_code.ipynb&quot; code to read the CSV file, prepare training data, plot one image, some basis for loss and activation function. Read the supplied code very carefully before you start.</p>
+<blockquote id="20260308174432-uvnjddh" updated="20260310232721">
+<p id="20260308174432-eks15m4" updated="20250226003715"><span data-type="strong">Note:</span></p>
+<p updated="20260310232721" id="20260308174432-90d07w0">取决于你的电脑配置，如果配置比较好，可以多用点训练数据，我们在数据准备函数里面有data_use_ratio，如果电脑比较差或者想先跑跑代码是否有错，可以用一个小一些数字。但一般来说笔记本跑1万个数据没有问题，效果也还行。  
+prepare_binary_data(csv_file, target_labels, train_ratio=0.8, data_use_ratio=1.0)  
+prepare_multi_data(csv_file, train_ratio=0.8, data_use_ratio=1.0)</p>
+</blockquote>
+<h2 id="20260308174432-m3l67ix" updated="20250225213314">Q1: Binary classification</h2>
+<p id="20260308174432-4wl16bl" updated="20250225193616">Though MNIST is often used for multi-class classification, we will first look at binary classification of different subsets of digits to differentiate two digits. Let's go through some details before actually solving this problem.</p>
+<p id="20260308174432-4lyiooe" updated="20250225193326">For binary classification problem, we need to use sigmoid activation function for the last layer of the model.</p>
+<div data-content="sigmoid(z) = \frac{1}{1 + e^{-z}}" data-subtype="math" id="20260308174432-6tbywxo" updated="20250225175513"><div spin="1"></div></div>
+<p id="20260308174432-h39io0f" updated="20250225193044">The loss function is binary cross-entropy loss, or called negative log likelihood (NLL):</p>
+<div data-content="\mathcal{L}_{\text{nll}}(\hat{y}, y) = - \left[ y \log(\hat{y}) + (1 - y) \log(1 - \hat{y}) \right]" data-subtype="math" id="20260308174432-0jpym7e" updated="20250225193044"><div spin="1"></div></div>
+<p id="20260308174432-vdp4u8j" updated="20250225193011">Recall that when we do back-propagation, we need to use chain-rule like following to calculate the gradient for each layer sequentially.</p>
+<div data-content="\frac{\partial \text{loss}}{\partial Z^l} = \frac{\partial A^l}{\partial Z^l} \cdot W^{l+1} \cdot \frac{\partial A^{l+1}}{\partial Z^{l+1}} \cdot \ldots \cdot W^{L-1} \cdot \frac{\partial A^{L-1}}{\partial Z^{L-1}} \cdot W^L \cdot
+\frac{\partial A^L}{\partial Z^L} \cdot
+
+ \frac{\partial \text{loss}}{\partial A^L}" data-subtype="math" updated="20250225193401" id="20260308174432-kgzuc7y"><div spin="1"></div></div>
+<p id="20260308174432-8evkr8l" updated="20250225193647">However, as you will probably see (try it), it is not very clean to calculate the <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial A^L}" contenteditable="false" class="render-node"></span>. It is even worse for cross-entropy loss for softmax activation since you will get a matrix of gradients. It would be easier to directly calculate <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial Z^L}= \frac{\partial A^L}{\partial Z^L} \cdot
+
+ \frac{\partial \text{loss}}{\partial A^L}" contenteditable="false" class="render-node"></span> directly. </p>
+<h3 id="20260308174432-tfrws16" updated="20250225213314"><span data-type="strong">Task 1: derivative for sigmoid and binary cross-entropy loss</span></h3>
+<p id="20260308174432-f7yds0h" updated="20250225200416">Derive the derivative equations for <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial A^L}" contenteditable="false" class="render-node"></span> and <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial Z^L}" contenteditable="false" class="render-node"></span>. (写出推导步骤) <span data-type="text" style="font-family: var(--b3-font-family-protyle); font-size: var(--b3-font-size-editor); background-color: var(--b3-theme-background); color: var(--b3-theme-on-background);">Show that </span><span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial Z^L} = y_{pred} - y_{true}" contenteditable="false" class="render-node" style="font-family: var(--b3-font-family-protyle); font-size: var(--b3-font-size-editor); background-color: var(--b3-theme-background); color: var(--b3-theme-on-background);"></span><span data-type="text" style="white-space: break-spaces; font-family: var(--b3-font-family-protyle); font-size: var(--b3-font-size-editor); font-variant-ligatures: no-common-ligatures; background-color: var(--b3-theme-background); color: var(--b3-theme-on-background); display: inline !important; float: none;"> for the last sigmoid output layer. </span></p>
+<p id="20260308174432-qlq704v" updated="20250225200324"><span data-type="text" style="white-space: break-spaces; font-family: var(--b3-font-family-protyle); font-size: var(--b3-font-size-editor); font-variant-ligatures: no-common-ligatures; background-color: var(--b3-theme-background); color: var(--b3-theme-on-background); display: inline !important; float: none;">If you use this equation for gradient backward propagation, please be careful with your last layer. Previously, we are using the following code to calculate </span><span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial Z^L}" contenteditable="false" class="render-node" style="white-space: break-spaces; font-family: var(--b3-font-family-protyle); font-size: var(--b3-font-size-editor); font-variant-ligatures: no-common-ligatures; background-color: var(--b3-theme-background); color: var(--b3-theme-on-background);"></span><span data-type="text" style="white-space: break-spaces; font-family: var(--b3-font-family-protyle); font-size: var(--b3-font-size-editor); font-variant-ligatures: no-common-ligatures; background-color: var(--b3-theme-background); color: var(--b3-theme-on-background); display: inline !important; float: none;">:</span></p>
+<p id="20260308174432-095uyud" updated="20250225200111">Show that <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial Z^L} = y_{pred} - y_{true}" contenteditable="false" class="render-node"></span> for the last sigmoid output layer. If you use this equation for gradient backward propagation, please be careful with your last layer. Previously, we are using the following code to calculate <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial Z^L}" contenteditable="false" class="render-node"></span>:</p>
+<pre class="code-block" data-language="python" id="20260308174432-4tahsgx" updated="20250225200102"><code class="hljs"> dZ = dA_out * self.activation_deriv(self.Z)  # shape (N, output_dim) 
+</code></pre>
+<p id="20260308174432-he8gj3d" updated="20250225200126">Now, it is different:</p>
+<pre class="code-block" data-language="python" id="20260308174432-5ehpveg" updated="20250225200142"><code class="hljs"> dZ = y_pred - y_true  # shape (N, output_dim) 
+</code></pre>
+<p id="20260308174432-zva4vni" updated="20250225200620">So, you need to specially handle this for the last layer.</p>
+<p id="20260308174432-1040cdv" updated="20250225200623"><span data-type="text" style="color: var(--b3-font-color1);">Note</span>: You can certainly use the original way to calculate <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial A^L}" contenteditable="false" class="render-node"></span> and <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial Z^L}" contenteditable="false" class="render-node"></span>. But, you have to use <span data-type="code">dZ = y_pred - y_true</span> in this task since the next Q2 softmax multi-class classification also needs to use this otherwise the <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial A^L}" contenteditable="false" class="render-node"></span> for softmax is too complicated.</p>
+<p id="20260308174432-xtk48kn" updated="20250225201152">You can consider using the following strategy:</p>
+<pre class="code-block" data-language="python" id="20260308174432-0jxxgny" updated="20250225213314"><code class="hljs">class FullyConnectedLayer:
+    def __init__(self, input_dim, output_dim, activation='relu', dim_output=False):
+       # ...
+  
+    def forward(self, A_in):
+       # ...
+       return self.A_out
+  
+    def backward(self, dA_out, y_true=None, is_output_layer=False):
+        # ....
+        if is_output_layer and (self.activation == sigmoid or self.activation == softmax):
+            # dZ = ....
+        else:
+            # dZ = ....
+        # .....
+        return dA_in, dW, db
+    
+    def print_dims(self, label, *args):
+        # ...
+
+
+class NeuralNetwork:
+    def __init__(self, layers_config):
+        # ....
+  
+    def forward(self, X):
+        # ...
+        return A  # final output
+  
+    def backward(self, dA, y_true):
+        for i, layer in reversed(list(enumerate(self.layers))):
+            if i == len(self.layers) - 1:  # Output layer
+                dA, dW, db = layer.backward(dA_out=None, y_true=y_true, is_output_layer=True)
+            else:  # Hidden layers
+                dA, dW, db = layer.backward(dA_out=dA)
+            grads.append((dW, db))
+        # grads are collected in reverse order
+        grads.reverse()
+        return grads
+  
+    def update_params(self, grads, lr=0.001):
+       # ...
+</code></pre>
+<h3 id="20260308174432-h05z8p1" updated="20250225213805">Task 2: Binary digits classification</h3>
+<p id="20260308174432-1oaw39k" updated="20250225193820">Try (at least) the following pairwise classification tasks: 1 vs 7, 3 vs 5, 4 vs 9. You can certainly try other combinations.</p>
+<p id="20260308174432-tncnlg0" updated="20250225193840">Please include the following discussions in your homework:</p>
+<ul start="0" id="20260308174432-mu69zgv" updated="20250225194034">
+<li id="20260308174432-va0fjst" updated="20250225193841">
+<p id="20260308174432-1k7zs7f" updated="20250225193922">Report how model structure affects the training speed, prediction accuracy.</p>
+</li>
+<li id="20260308174432-lshgoqc" updated="20250225194034">
+<p id="20260308174432-6e0ro2v" updated="20250225194034">Draw some examples of correct and incorrect predictions. Discuss why are wrong correct or wrong.</p>
+</li>
+</ul>
+<blockquote updated="20250225193606" id="20260308174432-6qaooa9">
+<p id="20260308174432-3gezfab" updated="20250225193529">Additional tips:</p>
+<ul start="0" id="20260308174432-hw0fn3r" updated="20250225193606">
+<li id="20260308174432-cpk2wdu" updated="20250225193610">
+<p updated="20250225193610" id="20260308174432-l2kik0w">Refer to the demo code to solve this problem (you should find all pieces of codes for constructing the required neural network).</p>
+</li>
+<li id="20260308174432-839yxwr" updated="20250225193606">
+<p id="20260308174432-9ib9gnm" updated="20250225193606">You can start with the neural network structure with the following configurations:  
+layers_config = [(784, 128, 'relu'), (128, 64, 'relu'), (64, 1, 'sigmoid')]  
+learning_rate = 0.001, epoch = 100  
+Then, you modify the model to see how the performance changes</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="20260308174432-shbfk7o" updated="20250225220211"><span data-type="strong">Q2: 10-digit Multi-Class Classification</span></h2>
+<p updated="20250225213805" id="20260308174432-yqdbt6e">Now, you will extend the binary classification approach to classify all 10 digits (0-9) using a neural network. Instead of using a sigmoid activation function for binary classification, the final layer must now use the <span data-type="strong">softmax activation function</span>, which is commonly used for multi-class classification problems.</p>
+<p id="20260308174432-yyiwqzx" updated="20250225213805">The <span data-type="strong">softmax function</span> is defined as:</p>
+<div data-content="\text{softmax}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{N} e^{z_j}}" data-subtype="math" id="20260308174432-geuqkvc" updated="20250225213829"><div spin="1"></div></div>
+<p id="20260308174432-cwk4742" updated="20250225213822">where <span data-type="inline-math" data-subtype="math" data-content="z_i" contenteditable="false" class="render-node"></span> is the score for class <span data-type="inline-math" data-subtype="math" data-content="i" contenteditable="false" class="render-node"></span>, and <span data-type="inline-math" data-subtype="math" data-content="N" contenteditable="false" class="render-node"></span> is the total number of classes (10 in this case).</p>
+<p id="20260308174432-o2qthqt" updated="20250225213805">You will need to derive the <span data-type="strong">gradient</span> of the cross-entropy loss function with respect to the softmax input. The cross-entropy loss for a multi-class classification problem is:</p>
+<div data-content="\mathcal{L}_{\text{cross-entropy}}(\hat{y}, y) = - \sum_{i=1}^{N} y_i \log(\hat{y}_i)" data-subtype="math" updated="20250225214015" id="20260308174432-a4tc8or"><div spin="1"></div></div>
+<p id="20260308174432-jo2snd7" updated="20250225213850">where <span data-type="inline-math" data-subtype="math" data-content="y_i" contenteditable="false" class="render-node"></span> is the one-hot encoded true label and <span data-type="inline-math" data-subtype="math" data-content="\hat{y}_i" contenteditable="false" class="render-node"></span> is the predicted probability for class <span data-type="inline-math" data-subtype="math" data-content="i" contenteditable="false" class="render-node"></span>.</p>
+<p id="20260308174432-y9q2oeu" updated="20250225214316">Similar to sigmoid and binary cross-entropy loss above, we don't need to compute <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \mathcal{L}}{\partial A^L}" contenteditable="false" class="render-node"></span>, instead we can directly calculate <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \mathcal{L}}{\partial Z^L} = y_{\text{pred}} - y_{\text{true}}" contenteditable="false" class="render-node" style="font-family: var(--b3-font-family-protyle); font-size: var(--b3-font-size-editor); background-color: var(--b3-theme-background); color: var(--b3-theme-on-background);"></span><span data-type="text" style="white-space: break-spaces; font-family: var(--b3-font-family-protyle); font-size: var(--b3-font-size-editor); font-variant-ligatures: no-common-ligatures; background-color: var(--b3-theme-background); color: var(--b3-theme-on-background); display: inline !important; float: none;"> (You don't need derive this in this question</span>.</p>
+<h3 id="20260308174432-qs84myb" updated="20250225220211">Task 1: Implement <span data-type="strong">multi-class classification</span></h3>
+<p updated="20250225214242" id="20260308174432-76fqrak">Modify your previous binary classification model by:</p>
+<ul start="0" id="20260308174432-zwk441o" updated="20250225214248">
+<li id="20260308174432-fjydglz" updated="20250225213805">
+<p id="20260308174432-e45p9ro" updated="20250225214250">Changing the final layer activation from sigmoid to softmax.</p>
+</li>
+<li id="20260308174432-lhn7znt" updated="20250225214248">
+<p id="20260308174432-9plis0f" updated="20250225214248">Updating the loss function to cross-entropy loss.</p>
+</li>
+</ul>
+<p id="20260308174432-ujtozd0" updated="20250225213805">You may start with the following model configuration and later experiment with different structures:</p>
+<pre class="code-block" data-language="python" id="20260308174432-0m6i6z3" updated="20250225213805"><code class="hljs">layers_config = [
+    (784, 128, 'relu'),
+    (128, 64, 'relu'),
+    (64, 10, 'softmax')
+]
+learning_rate = 0.001
+epochs = 100
+</code></pre>
+<p id="20260308174432-eahr07s" updated="20250225214534">The final layer now has <span data-type="strong">10 output units</span>, corresponding to the 10 possible digit classes.</p>
+<p id="20260308174432-8pdiksb" updated="20250225215310">Discuss how model and training parameters (e.g., epoch, learning rate, model configurations) will affect the prediction accuracy.</p>
+<p id="20260308174432-ucoy4cq" updated="20250225215221">Note: 这个任务跑通工作量比较大，能跑通就很不错。</p>
+<h3 id="20260308174432-wz6siwa" updated="20250225235243">Task 2: learn how to save and load trained parameters</h3>
+<p id="20260308174432-jlqss05" updated="20250225220436">After we trained the neural network, we want to save the optimized weights for later use, such that we don't have to train the neural network.</p>
+<p id="20260308174432-lpyyxiq" updated="20250225220646">Use the following code as a reference. Try it yourself to achieve it. </p>
+<pre class="code-block" data-language="python" id="20260308174432-ya0tbk9" updated="20250225235131"><code class="hljs">import pickle
+
+class NeuralNetwork:
+    def __init__(self, layers_config):
+        # ...
+
+    def forward(self, X):
+       # ...
+
+    def backward(self, dA, y_true):
+        # ...
+
+    def update_params(self, grads, lr=0.001):
+        # ...
+
+    def save_model(self, file_path):
+        &quot;&quot;&quot;
+        Saves the neural network's weights and biases to a file.
+        &quot;&quot;&quot;
+        model_data = {
+            &quot;layers_config&quot;: [(layer.W.shape[0], layer.W.shape[1], layer.activation.__name__) for layer in self.layers],
+            &quot;weights&quot;: [layer.W for layer in self.layers],
+            &quot;biases&quot;: [layer.b for layer in self.layers]
+        }
+        with open(file_path, 'wb') as f:
+            pickle.dump(model_data, f)
+        print(f&quot;Model saved to {file_path}&quot;)
+
+	# 这decorator很重要，记得加上就好，具体原因可以自行学习：
+	# https://www.geeksforgeeks.org/class-method-vs-static-method-python/
+	# 即你无需创建这类class的object，就可以直接调用这个func，如下面load_model所示
+	@staticmethod 
+    def load_model(file_path):
+        &quot;&quot;&quot;
+        Loads a saved neural network model from a file.
+        &quot;&quot;&quot;
+        with open(file_path, 'rb') as f:
+            model_data = pickle.load(f)
+
+        nn = NeuralNetwork(model_data[&quot;layers_config&quot;])
+        for layer, W, b in zip(nn.layers, model_data[&quot;weights&quot;], model_data[&quot;biases&quot;]):
+            layer.W = W
+            layer.b = b
+  
+        print(f&quot;Model loaded from {file_path}&quot;)
+        return nn
+
+</code></pre>
+<p id="20260308174432-gejvi57" updated="20250225235148"><span data-type="strong">Save the trained model:</span></p>
+<pre class="code-block" data-language="python" id="20260308174432-uav763e" updated="20250225235148"><code class="hljs">nn.save_model(&quot;trained_model.pkl&quot;)
+</code></pre>
+<p id="20260308174432-c3m5jqw" updated="20250225235220"><span data-type="strong">Load the trained model:</span></p>
+<pre class="code-block" data-language="python" id="20260308174432-oqzg7p3" updated="20250225235220"><code class="hljs">loaded_nn = NeuralNetwork.load_model(&quot;trained_model.pkl&quot;)
+</code></pre>
+<blockquote id="20260308174432-lac1lfk" updated="20250225235243">
+<p id="20260308174432-aai0s1d" updated="20250225235243">trained_model.pkl 就是你训练好的weights信息</p>
+</blockquote>
+<p id="20260308174432-fyd14qb" updated="20250225213456">‍</p>
+</div>
+<script src="appearance/icons/material/icon.js?v=3.5.7"></script><script src="appearance/icons/Remix-icon/icon.js?v=3.5.7"></script>
+<script src="stage/build/export/protyle-method.js?v=3.5.7"></script>
+<script src="stage/protyle/js/lute/lute.min.js?v=3.5.7"></script>  
+<script>
+    
+    window.siyuan = {
+      config: {
+        appearance: { mode: 1, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+        editor: { 
+          codeLineWrap: true,
+          fontSize: 16,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: false,
+          katexMacros: decodeURI(`%7B%7D`),
+        }
+      },
+      languages: {copy:"复制"}
+    };
+    const previewElement = document.getElementById('preview');
+    Protyle.highlightRender(previewElement, "stage/protyle");
+    Protyle.mathRender(previewElement, "stage/protyle", false);
+    Protyle.mermaidRender(previewElement, "stage/protyle");
+    Protyle.flowchartRender(previewElement, "stage/protyle");
+    Protyle.graphvizRender(previewElement, "stage/protyle");
+    Protyle.chartRender(previewElement, "stage/protyle");
+    Protyle.mindmapRender(previewElement, "stage/protyle");
+    Protyle.abcRender(previewElement, "stage/protyle");
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, "stage/protyle");
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+            navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd().replace(/ /g, " ").replace(/‍```/g, "```"));
+            event.preventDefault();
+            event.stopPropagation();
+      })
+    });
+</script>
+</body></html>

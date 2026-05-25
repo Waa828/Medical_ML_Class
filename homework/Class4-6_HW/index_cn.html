@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="dark" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+    <base href="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" id="baseStyle" href="stage/build/export/base.css?v=3.5.7"/>
+    <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="appearance/themes/midnight/theme.css?v=3.5.7"/>
+    <script src="stage/protyle/js/protyle-html.js?v=3.5.7"></script>
+    
+    <title>机器学习第六课作业</title>
+    <!-- Exported by SiYuan v3.5.7 -->
+    <style>
+        body {font-family: var(--b3-font-family);background-color: var(--b3-theme-background);color: var(--b3-theme-on-background)}
+        @font-face {
+  font-family: "Emojis Additional";
+  src: url(appearance/fonts/Noto-COLRv1-2.047/Noto-COLRv1.woff2) format("woff2");
+  unicode-range: U+1fae9, U+1fac6, U+1fabe, U+1fadc, U+e50a, U+1fa89, U+1fadf, U+1f1e6-1f1ff, U+1f3f4, U+e0067, U+e0062,
+  U+e0065, U+e006e, U+e007f, U+e0073, U+e0063, U+e0074, U+e0077, U+e006c;
+  size-adjust: 85%;
+}
+@font-face {
+  font-family: "Emojis Reset";
+  src: local("Segoe UI Emoji"),
+  local("Segoe UI Symbol");
+  unicode-range: U+263a, U+21a9, U+2642, U+303d, U+2197, U+2198, U+2199, U+2196, U+2195, U+2194, U+2660, U+2665, U+2666, 
+  U+2663, U+3030, U+21aa, U+25b6, U+25c0, U+2640, U+203c, U+a9, U+ae, U+2122;
+  size-adjust: 85%;
+}
+@font-face {
+  font-family: "Emojis";
+  src: local("Segoe UI Emoji"),
+  local("Segoe UI Symbol");
+  size-adjust: 85%;
+}
+:root { --b3-font-size-editor: 16px }
+.b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: none }
+        
+        
+    </style>
+    <style id="snippetCSS20240908213950-5chvo6d">/*══════════  COLOURS & COMBINED FONT STACKS  ══════════*/
+:root {
+  /* Light theme */
+  --h1-clr: #ff6b81;   /* ruby red */
+  --h2-clr: #90a8ff;   /* royal blue */
+
+  /* Font stacks: Arial first for Latin, Chinese fonts for Han glyphs */
+  --font-yahei: "Arial", "微软雅黑", "Microsoft YaHei",
+                "PingFang SC", "Noto Sans CJK SC", sans-serif;
+
+  --font-kaiti: "Arial", "楷体", "KaiTi", "STKaiti", "KaiTi SC", serif;
+  --font-song:  "Arial", "宋体", "SimSun", serif;
+}
+
+/* Dark theme tints */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --h1-clr: #ff6b81;  /* rose ruby */
+    --h2-clr: #90a8ff;  /* royal blue 300 */
+  }
+}
+
+/*══════════  SHARED HEADING PROPS  ══════════*/
+h1, h2, h3, h4,
+.h1, .h2, .h3, .h4 {
+  margin: 0 0 0.7em;
+  line-height: 1.3;
+  scroll-margin-top: 5rem;           /* smooth anchor jumps */
+}
+
+/*══════════  H1  ══════════*/
+h1, .h1 {
+  font-family: var(--font-yahei);
+  font-size: clamp(2.8rem, 5vw + 0.8rem, 3.4rem); /* ≈45–54 px */
+  font-weight: 800;
+  color: var(--h1-clr);
+  letter-spacing: 0.5px;
+}
+
+/*══════════  H2  ══════════*/
+h2, .h2 {
+  font-family: var(--font-yahei);
+  font-size: clamp(2.2rem, 4vw + 0.5rem, 2.8rem); /* ≈34–45 px */
+  font-weight: 700;
+  color: var(--h2-clr);
+}
+
+/*══════════  H3  ══════════*/
+h3, .h3 {
+  font-family: var(--font-kaiti);
+  font-size: 1.625rem;               /* 26 px */
+  font-weight: 700;
+  color: inherit;                    /* follows body colour */
+}
+
+/*══════════  H4  (text underline)  ══════════*/
+h4, .h4 {
+  font-family: var(--font-song);
+  font-size: 0.75rem;                /* 20 px */
+  font-weight: 500;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;     /* slight gap below text */
+  text-decoration-thickness: 0.75px;    /* crisp 2 px line */
+}
+</style>
+</head>
+<body>
+<div class="b3-typography" 
+style="max-width: 800px;margin: 0 auto;" id="preview"><h1 id="ML-Class-6-Homework" title="ML Class 6 Homework" updated="20260411111741">机器学习第六课作业</h1>
+<h1 id="20260407231234-dsgw3q7" updated="20260411110545">问题1：构建多智能体TLC洗脱剂优化应用</h1>
+<p id="20260408214129-atyn81i" updated="20260410183452">如之前的TLC作业中所介绍的，薄层色谱（TLC）是化学家最常用的工具之一，用于快速判断反应进程并选择合适的洗脱剂进行纯化。在实际操作中，化学家通常会迭代调整洗脱剂组成，直到目标产物出现在一个有用的Rf窗口内，并且与反应物或副产物充分分离。在之前的作业中，你研究了分子结构和溶剂组成如何影响Rf值，并使用模型预测了TLC行为。</p>
+<p id="20260410183456-z35m66p" updated="20260410184305">在本次作业中，你将更进一步：构建一个<span data-type="strong">多智能体应用</span>，模拟化学家对TLC优化的推理过程。由于你手头没有TLC实验装置，我们使用之前作业中训练的模型作为TLC模拟器（模拟器），以获取给定分子和洗脱剂组成下的实验TLC Rf值。<span data-type="strong">该应用将接受一个反应SMILES（例如 CC(=O)O.CCO>>CC(=O)OCC），识别反应物和产物，然后使用三个协作智能体迭代搜索更优的TLC洗脱剂组成。</span></p>
+<p id="20260408214921-l3h6y5b" updated="20260408214129">为了使作业易于管理，请使用以下假设：</p>
+<ol id="20260408214921-st88qmo" updated="20260408214129">
+<li id="20260408214921-xveppcw" updated="20260408214129">
+<p id="20260408214921-4n1kgl5" updated="20260408214129">你可以忽略不属于主要有机转化的催化剂、溶剂和试剂。</p>
+</li>
+<li id="20260408214921-4gy0st4" updated="20260408214129">
+<p id="20260408214921-rz4nfe1" updated="20260408215012">你可以使用<span data-type="strong">二元洗脱剂体系</span>，例如正己烷/乙酸乙酯，两种溶剂的比例之和应为<span data-type="strong">100%</span>。</p>
+</li>
+</ol>
+<h2 id="20260408214600-csg92fd" updated="20260411110545">Q1. 构建三个智能体</h2>
+<p id="20260408214600-t3lo4si" updated="20260408215318">使用大语言模型API实现以下三个智能体。</p>
+<blockquote id="20260408215318-8533ewi" updated="20260411110545">
+<p id="20260408215352-p1te9qv" updated="20260408215416">你可以考虑使用阿里云的大模型平台，会提供一些免费的token</p>
+<p updated="20260408221516" id="20260408215417-2tq3sjj">也可以用使用https://api.v36.cm/，这个上面什么模型都有，应该注册会送一些token，也不妨充值10块钱，对于我们的作业而言，基本上花不了多少钱</p>
+<p id="20260411110523-40q7amj" updated="20260411110545">至少使用gpt-4o-mini或者更强的模型</p>
+</blockquote>
+<p id="20260411110440-ncrr9vi" updated="20260411110518">你可以在提供的 "agent_prompts.yaml" 文件中找到以下智能体的示例系统提示词。</p>
+<h4 id="20260408214706-mb570q4" updated="20260411094609">智能体1：解释智能体（Explanation Agent）</h4>
+<p id="20260408214706-k65q4ft" updated="20260410185413">该智能体读取当前TLC实验结果并进行解释：1）当前TLF结果在化学上意味着什么；2）判断分离效果是否足够好。</p>
+<h4 id="20260408214706-k8h4ie5" updated="20260410190320">智能体2：组成调优智能体（Composition Tuning Agent）</h4>
+<p id="20260408214706-ihzytro" updated="20260410184859">该智能体根据解释智能体提供的结果和TLC原理，提出<span data-type="strong">下一次尝试的洗脱剂组成</span>。其任务是推理改变溶剂极性将如何影响Rf值和分离效果。例如：</p>
+<ul start="0" id="20260408214706-pwujrhs" updated="20260408214129">
+<li id="20260408214706-iyd6h6m" updated="20260408214129">
+<p id="20260408214706-7uzareu" updated="20260408214129">如果产物Rf值过低，智能体可以提高洗脱剂极性；</p>
+</li>
+<li id="20260408214706-w4l0n1j" updated="20260408214129">
+<p id="20260408214706-f40b0l9" updated="20260408214129">如果产物Rf值过高，智能体可以降低洗脱剂极性；</p>
+</li>
+<li id="20260408214706-zqg3a8m" updated="20260408214129">
+<p id="20260408214706-7uyrnpd" updated="20260408214129">如果产物与某一反应物距离过近，智能体应尝试通过调整组成来改善分离。</p>
+</li>
+</ul>
+<p id="20260408214706-0tpapln" updated="20260408214129">该智能体应输出下一个候选洗脱剂组成。</p>
+<h4 id="20260408214706-7okwjer" updated="20260410190611">智能体3：实验智能体（Experimentation Agent）</h4>
+<p updated="20260410185924" id="20260408214706-fpr6rii">首先，TLC模拟模型使用提议的洗脱剂组成来模拟实验。该智能体获取模拟的TLC结果，然后将结果整理为自然语言形式，用于发送给解释智能体。</p>
+<h2 id="20260408214600-3kh4frp" updated="20260411110557">Q2：将智能体连接为迭代工作流</h2>
+<p id="20260408214600-t2q2vcv" updated="20260410190505">你的系统应按如下方式循环运行：</p>
+<ol id="20260408214600-6620av5" updated="20260411110557">
+<li id="20260410190503-okmtg08" updated="20260411110557">
+<p id="20260410190503-978cphs" updated="20260411110557">用户发送任务请求，要求使用TLC分离产物。</p>
+</li>
+<li updated="20260411100655" id="20260410190011-391pvnh">
+<p updated="20260411100655" id="20260410190011-z3de5rz">运行<span data-type="strong">解释智能体</span>以解读结果（如果是第一次迭代，则接收用户任务描述提示来启动）</p>
+</li>
+<li id="20260411100516-y7bygca" updated="20260411100516">
+<p updated="20260411100516" id="20260411100516-0ehiajq">运行<span data-type="strong">组成调优智能体</span>以提出更优的组成方案。</p>
+</li>
+<li id="20260410190032-xk5xsx9" updated="20260410190032">
+<p id="20260410190032-q41nz5s" updated="20260410190032">运行<span data-type="strong">实验智能体</span>以模拟TLC实验。</p>
+</li>
+<li id="20260408214600-w4z0ksr" updated="20260411100706">
+<p id="20260408214600-ba5evbi" updated="20260411100706">返回步骤2并重复，直到满足停止条件或达到最大迭代次数。</p>
+</li>
+</ol>
+<h2 id="20260408214600-6gnlkgj" updated="20260411111741">Q3：优化TLC洗脱剂</h2>
+<p id="20260408221230-rfub5wl" updated="20260408221339">我们使用与之前作业相同的示例。但现在，你需要让智能体找到最优洗脱剂。</p>
+<p id="20260408221230-bw4dgnw" updated="20260408221430">洗脱剂标准：为了使混合物具有良好的分离性能，我们需要找到合适的洗脱剂组成，使产物的Rf值在0.2~0.3范围内，且其他反应物与目标化合物的Rf值差异大于0.1。</p>
+<p id="20260408221230-xaehxjz" updated="20250315222250">考虑以下两种药物合成中广泛使用的反应，我们希望将产物从反应粗品中分离出来。</p>
+<p id="20260408221230-tqmgfft" updated="20260411105045"><span data-type="strong">Buchwald-Hartwig交叉偶联反应</span></p>
+<p id="20260408221230-8qn6j2r" updated="20260410190145">假设反应粗品（反应后的混合物）仅包含反应物<span data-type="strong">1</span>和产物<span data-type="strong">2</span>。找到合适的洗脱剂组成以将<span data-type="strong">2</span>与<span data-type="strong">1</span>分离（<span data-type="text" style="color: var(--b3-font-color8);">为简化起见，你可以直接输入1>>2作为反应SMILES</span>）</p>
+<p id="20260408221230-yji50yd" updated="20250315222144">​<span contenteditable="false" data-type="img" class="img" style="min-width: calc(100% - 0.1em);"><span> </span><span style="width: 550px;"><span class="protyle-action protyle-icons"><span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMore"></use></svg></span></span><img src="assets/image-20250315222141-p8hrp95.png" data-src="assets/image-20250315222141-p8hrp95.png" alt="image" /><span class="protyle-action__drag"></span><span class="protyle-action__title"><span></span></span></span><span> </span></span>​</p>
+<blockquote id="20260408221230-tke4wk6" updated="20250315223407">
+<p id="20260408221230-3vzs8fu" updated="20250315223407">参考：https://en.wikipedia.org/wiki/Buchwald%E2%80%93Hartwig_amination</p>
+</blockquote>
+<p id="20260408221230-osonl6n" updated="20250315223646">如果你没有安装ChemDraw软件，可以使用在线分子绘图工具绘制分子并获取其SMILES。</p>
+<p id="20260408221230-vd5owu5" updated="20250315223725">https://www.rcsb.org/chemical-sketch</p>
+<p id="20260408221230-hc62snx" updated="20250315223909">https://molview.org/  ---- 绘制分子，然后点击 "Tools-->Information Card"</p>
+<p id="20260411111656-4tnsl5w" updated="20260411111741"><span data-type="text" style="background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);">注意：本作业提供了比较详细的样本代码，考虑从基本代码做起</span></p>
+<p id="20260411111657-snl9f3c" updated="20260411111657">‍</p>
+</div>
+<script src="appearance/icons/material/icon.js?v=3.5.7"></script><script src="appearance/icons/Remix-icon/icon.js?v=3.5.7"></script>
+<script src="stage/build/export/protyle-method.js?v=3.5.7"></script>
+<script src="stage/protyle/js/lute/lute.min.js?v=3.5.7"></script>  
+<script>
+    
+    window.siyuan = {
+      config: {
+        appearance: { mode: 1, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+        editor: { 
+          codeLineWrap: true,
+          fontSize: 16,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: false,
+          katexMacros: decodeURI(`%7B%7D`),
+        }
+      },
+      languages: {copy:"复制"}
+    };
+    const previewElement = document.getElementById('preview');
+    Protyle.highlightRender(previewElement, "stage/protyle");
+    Protyle.mathRender(previewElement, "stage/protyle", false);
+    Protyle.mermaidRender(previewElement, "stage/protyle");
+    Protyle.flowchartRender(previewElement, "stage/protyle");
+    Protyle.graphvizRender(previewElement, "stage/protyle");
+    Protyle.chartRender(previewElement, "stage/protyle");
+    Protyle.mindmapRender(previewElement, "stage/protyle");
+    Protyle.abcRender(previewElement, "stage/protyle");
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, "stage/protyle");
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+            navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd().replace(/ /g, " ").replace(/‍```/g, "```"));
+            event.preventDefault();
+            event.stopPropagation();
+      })
+    });
+</script>
+</body></html>

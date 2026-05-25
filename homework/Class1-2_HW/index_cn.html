@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="dark" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+    <base href="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" id="baseStyle" href="stage/build/export/base.css?v=3.5.7"/>
+    <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="appearance/themes/midnight/theme.css?v=3.5.7"/>
+    <script src="stage/protyle/js/protyle-html.js?v=3.5.7"></script>
+    
+    <title>机器学习 第1-2次作业</title>
+    <!-- 由思源笔记 v3.5.7 导出 -->
+    <style>
+        body {font-family: var(--b3-font-family);background-color: var(--b3-theme-background);color: var(--b3-theme-on-background)}
+        @font-face {
+  font-family: "Emojis Additional";
+  src: url(appearance/fonts/Noto-COLRv1-2.047/Noto-COLRv1.woff2) format("woff2");
+  unicode-range: U+1fae9, U+1fac6, U+1fabe, U+1fadc, U+e50a, U+1fa89, U+1fadf, U+1f1e6-1f1ff, U+1f3f4, U+e0067, U+e0062,
+  U+e0065, U+e006e, U+e007f, U+e0073, U+e0063, U+e0074, U+e0077, U+e006c;
+  size-adjust: 85%;
+}
+@font-face {
+  font-family: "Emojis Reset";
+  src: local("Segoe UI Emoji"),
+  local("Segoe UI Symbol");
+  unicode-range: U+263a, U+21a9, U+2642, U+303d, U+2197, U+2198, U+2199, U+2196, U+2195, U+2194, U+2660, U+2665, U+2666, 
+  U+2663, U+3030, U+21aa, U+25b6, U+25c0, U+2640, U+203c, U+a9, U+ae, U+2122;
+  size-adjust: 85%;
+}
+@font-face {
+  font-family: "Emojis";
+  src: local("Segoe UI Emoji"),
+  local("Segoe UI Symbol");
+  size-adjust: 85%;
+}
+:root { --b3-font-size-editor: 16px }
+.b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: none }
+        
+        
+    </style>
+    <style id="snippetCSS20240908213950-5chvo6d">/*══════════  颜色与组合字体栈  ══════════*/
+:root {
+  /* 浅色主题 */
+  --h1-clr: #ff6b81;   /* 红宝石色 */
+  --h2-clr: #90a8ff;   /* 皇家蓝 */
+
+  /* 字体栈：优先使用 Arial 用于拉丁字母，中文字体用于汉字 */
+  --font-yahei: "Arial", "微软雅黑", "Microsoft YaHei",
+                "PingFang SC", "Noto Sans CJK SC", sans-serif;
+
+  --font-kaiti: "Arial", "楷体", "KaiTi", "STKaiti", "KaiTi SC", serif;
+  --font-song:  "Arial", "宋体", "SimSun", serif;
+}
+
+/* 深色主题微调 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --h1-clr: #ff6b81;  /* 玫瑰红宝石色 */
+    --h2-clr: #90a8ff;  /* 皇家蓝 300 */
+  }
+}
+
+/*══════════  共享标题属性  ══════════*/
+h1, h2, h3, h4,
+.h1, .h2, .h3, .h4 {
+  margin: 0 0 0.7em;
+  line-height: 1.3;
+  scroll-margin-top: 5rem;           /* 平滑锚点跳转 */
+}
+
+/*══════════  H1  ══════════*/
+h1, .h1 {
+  font-family: var(--font-yahei);
+  font-size: clamp(2.8rem, 5vw + 0.8rem, 3.4rem); /* ≈45–54 px */
+  font-weight: 800;
+  color: var(--h1-clr);
+  letter-spacing: 0.5px;
+}
+
+/*══════════  H2  ══════════*/
+h2, .h2 {
+  font-family: var(--font-yahei);
+  font-size: clamp(2.2rem, 4vw + 0.5rem, 2.8rem); /* ≈34–45 px */
+  font-weight: 700;
+  color: var(--h2-clr);
+}
+
+/*══════════  H3  ══════════*/
+h3, .h3 {
+  font-family: var(--font-kaiti);
+  font-size: 1.625rem;               /* 26 px */
+  font-weight: 700;
+  color: inherit;                    /* 跟随正文颜色 */
+}
+
+/*══════════  H4  (文本下划线)  ══════════*/
+h4, .h4 {
+  font-family: var(--font-song);
+  font-size: 0.75rem;                /* 20 px */
+  font-weight: 500;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;     /* 文本下方轻微间隙 */
+  text-decoration-thickness: 0.75px;    /* 清晰 2px 线条 */
+}
+</style>
+</head>
+<body>
+<div class="b3-typography" 
+style="max-width: 800px;margin: 0 auto;" id="preview"><h1 id="ML-Class-1-2-Homework" title="ML Class 1-2 Homework" updated="20260308171835">机器学习 第1-2次作业</h1>
+<h1 id="20250219140132-naaw7ce" updated="20260308170829">问题 1：实现通用梯度下降算法</h1>
+<p id="20250219140132-9wiyc7e" updated="20250219140607">最简单且最常被提及的可微代价函数优化方法是梯度下降（课堂上已讨论）。理解其在实际问题中的行为非常重要。在本问题中，你将实现其两种最重要的形式：批量梯度下降和随机梯度下降（SGD）。</p>
+<h2 id="20250219144458-li3ww2g" updated="20260308170829">Q1: 热身：构建一个通用的梯度下降函数</h2>
+<p id="20250219144457-fugkf6w" updated="20250219154011">实现一个基本的梯度下降过程（一个Python函数），用于最小化关于向量输入（<span data-type="strong">x</span> 是向量）的标量函数（y 是标量）。</p>
+<p id="20250219144517-rfnp5yx" updated="20250221225804">编写一个通用的实现，使得你可以方便地指定目标函数、梯度函数、初始猜测、步长以及收敛准则（当连续两步的目标函数值之差低于阈值时停止）。在本问题中，你可以在实现中使用固定步长。</p>
+<p id="20250222173007-rb8dsva" updated="20250222173012">在作业中提供代码。</p>
+<pre class="code-block" data-language="python" id="20250219154022-iakwwtc" style="line-height: 22px;" updated="20260308170829"><code class="hljs">def gd_function(obj, grad, init_guess, step_size, epsilon, max_iter=100):
+    &quot;&quot;&quot;
+    梯度下降函数，用于最小化目标函数。
+
+    参数:
+    - obj: 要最小化的目标函数（接受向量输入，返回标量）。
+    - grad: 目标函数的梯度函数（返回梯度向量）。
+    - init_guess: 参数的初始猜测（向量）。
+    - step_size: 梯度下降更新的步长（学习率）。
+    - epsilon: 停止准则（当连续两步目标函数值之差低于阈值时停止）。
+    - max_iter: 最大迭代次数，防止无限循环。
+
+    返回:
+    - opt_point: 使目标函数最小化的参数向量。
+    &quot;&quot;&quot;
+    
+    # 在此处编写你的代码 ....
+
+    return opt_point
+
+</code></pre>
+<h2 id="20250219145645-i7yzt5s" updated="20260308171228">Q2: 使用 Q1 中的梯度下降函数优化高斯函数</h2>
+<p id="20250219144536-ii4yk48" updated="20260308171228">在以下两个函数上测试你的梯度下降过程：负高斯函数和二次碗函数。你至少需要完成以下任务：</p>
+<ul start="0" id="20260308171013-0ao38zz" updated="20260308171013">
+<li id="20260308171013-9qu4a4u" updated="20260308171013">
+<p id="20260308171013-rcalxoc" updated="20260308171033">讨论（并图示）初始猜测、步长和收敛准则的选择对最终解的影响。</p>
+</li>
+<li id="20260308171019-9loe4aj" updated="20260308171019">
+<p id="20260308171019-de6cedh" updated="20260308171021">梯度范数随迭代如何变化。</p>
+</li>
+<li id="20260308171035-t12rsb9" updated="20260308171035">
+<p id="20260308171035-5uwavfp" updated="20260308171035">绘制算法迭代寻找最优点的过程图。</p>
+</li>
+</ul>
+<h3 id="20250219150142-7coefw2" updated="20250221225622">A. 负高斯函数</h3>
+<div data-content="f(x) = - \frac{1}{\sqrt{(2\pi)^n |\Sigma|}} \exp \left[ - \frac{1}{2} (x - u)^T \Sigma^{-1} (x - u) \right]" data-subtype="math" id="20250219145946-l60ss5c" updated="20250221225444"><div spin="1"></div></div>
+<p id="20250219150142-wfczld0" updated="20250219214913">其导数可写为：</p>
+<div data-content="\frac{\partial f(x)}{\partial x} = - f(x) \Sigma^{-1} (x - u)" data-subtype="math" id="20250219150201-3xeovfl" updated="20250219214925"><div spin="1"></div></div>
+<p id="20250219214926-pf4ode3" updated="20250219214942">参数为：</p>
+<div data-content="u=\begin{bmatrix}
+	10\\
+	 10
+\end{bmatrix} \quad
+\Sigma=\begin{bmatrix}
+	1000 &amp; 0 \\
+	0 &amp; \ 1000
+\end{bmatrix}
+\quad n=2" data-subtype="math" id="20250219214942-68mq50t" updated="20250221225622"><div spin="1"></div></div>
+<h3 id="20250219150208-69alfax" updated="20250219215630">B. 二次碗函数</h3>
+<p updated="20250219215407" id="20250219215407-w06nnd3"><span data-type="inline-math" data-subtype="math" data-content="A" contenteditable="false" class="render-node"></span> 为正定矩阵：</p>
+<div data-content="f(x) = \frac{1}{2} x^T A x - x^T b" data-subtype="math" id="20250219150248-h9iri18" updated="20250219214915"><div spin="1"></div></div>
+<p id="20250219150223-38lrdzf" updated="20250219214915">其导数可写为：</p>
+<div data-content="\frac{\partial f(x)}{\partial x} = A x - b" data-subtype="math" id="20250219150242-jkt6fsq" updated="20250219215419"><div spin="1"></div></div>
+<p id="20250219215420-456sevr" updated="20250219215423">参数为：</p>
+<div data-content="A=\begin{bmatrix}
+	10 &amp; 5 \\
+	5 &amp; \ 10
+\end{bmatrix}
+\quad
+b=\begin{bmatrix}
+	400  \\
+	 400
+\end{bmatrix}" data-subtype="math" id="20250219215424-pdzosha" updated="20250219215630"><div spin="1"></div></div>
+<h2 id="20250219150310-sz1wc5h" updated="20260308171835">Q3: 数值梯度</h2>
+<p id="20260308171659-4y4674a" updated="20260308171851">梯度函数并不总是像上面给出的那样简洁。一种常见的方法是使用中心差分近似来数值计算不同点的梯度。</p>
+<blockquote id="20260308171854-vofrncd" updated="20260308171859">
+<p id="20260308171858-821g7tg" updated="20260308171859">https://en.wikipedia.org/wiki/Finite_difference</p>
+</blockquote>
+<p updated="20260308171659" id="20260308171659-cjlq9z4">关于第 $i$ 个参数的偏导数公式为：</p>
+<div data-content="\frac{\partial f(x)}{\partial x_i} \approx \frac{f(x + \epsilon e_i) - f(x - \epsilon e_i)}{2\epsilon}" data-subtype="math" id="20260308171659-zh2tl8r" updated="20260308171739"><div spin="1"></div></div>
+<p id="20260308171658-unfhheu" updated="20260308171835">其中 <span data-type="inline-math" data-subtype="math" data-content="e_i" contenteditable="false" class="render-node"></span> 是基向量（除第 i 个位置为 1 外，其余均为零），<span data-type="inline-math" data-subtype="math" data-content="\epsilon" contenteditable="false" class="render-node"></span> 是一个小的标量值。</p>
+<p id="20250219150809-gvt7yrq" updated="20260308171202"><span data-type="strong">Q3 问题中只需要使用</span> <span data-type="strong text" style="background-color: var(--b3-card-error-background); color: var(--b3-card-error-color);">负高斯函数</span> <span data-type="strong">作为目标。</span></p>
+<p id="20260308171206-z9hcoep" updated="20260308171219">你至少需要完成以下任务：</p>
+<ol id="20250219150359-s7d2ozh" updated="20250223130033">
+<li id="20250219150736-igdr270" updated="20250219150736">
+<p id="20250219150736-qg1u7aw" updated="20250219150736">编写代码，使用此方法在给定点数值近似函数的梯度。</p>
+</li>
+<li id="20250219150740-gjo554l" updated="20250219150740">
+<p updated="20250219150740" id="20250219150740-zsp50aa">通过在不同点比较解析梯度和数值梯度，对比你上面所用函数上的梯度值。</p>
+</li>
+<li id="20250219150928-52jx54d" updated="20250223130033">
+<p id="20250219150928-74wk1lq" updated="20250223130033">使用数值梯度进行梯度下降，寻找负高斯函数的最小点。</p>
+</li>
+</ol>
+<h1 id="20250219151337-7an5deh" updated="20260308172315">问题 2：实现随机梯度下降（SGD）</h1>
+<p id="20250219140325-hhyn9gz" updated="20250219151627">在机器学习中，批量梯度下降每次参数更新使用完整训练集的样本。因此，对于大型数据集，每次迭代会非常慢。此外，批量梯度下降的原始形式无法高效地纳入新数据。</p>
+<p id="20250219151628-13n91mb" updated="20260308172239">随机梯度下降（SGD）通过对梯度项使用随机近似解决了这些问题（如课堂上所讨论）。在本问题中，我们将在最小二乘拟合问题上同时使用批量梯度下降和 SGD。</p>
+<p id="20250219140325-vrt4yk8" updated="20260308172315">数据集在 <span data-type="code">fittingdatap.x.txt</span> 和 <span data-type="code">fittingdatap.y.txt</span> 文件中提供。<span data-type="inline-math" data-subtype="math" data-content="X" contenteditable="false" class="render-node"></span> 和 <span data-type="inline-math" data-subtype="math" data-content="y" contenteditable="false" class="render-node"></span> 的每一行代表一个数据样本对 <span data-type="inline-math" data-subtype="math" data-content="(x^{(i)}, y^{(i)})" contenteditable="false" class="render-node"></span>。</p>
+<p id="20250222163455-s7nafnp" updated="20250222163455">你的目标是找到系数向量 <span data-type="inline-math" data-subtype="math" data-content="\theta" contenteditable="false" class="render-node"></span>，最小化最小二乘误差：</p>
+<div data-content="J(\theta) = \| X\theta - y \|^2  = \sum_i (x^{(i)T} \theta - y^{(i)})^2" data-subtype="math" updated="20250219153720" id="20250219151951-1ugafpg"><div spin="1"></div></div>
+<p id="20250219153722-06q93i0" updated="20250219153722">使用 SGD 基于单个训练样本进行参数更新：</p>
+<div data-content="\theta_{t+1} = \theta_t - \eta_t \nabla \theta J(\theta_t; x^{(i)}, y^{(i)})" data-subtype="math" id="20250219153722-zgcnlt2" updated="20250219153722"><div spin="1"></div></div>
+<p id="20250219153722-dfnzqox" updated="20250219153722">其中 <span data-type="inline-math" data-subtype="math" data-content="\eta_t" contenteditable="false" class="render-node"></span> 是每次迭代 <span data-type="inline-math" data-subtype="math" data-content="t = 1, 2, \dots" contenteditable="false" class="render-node"></span> 的学习率，<span data-type="inline-math" data-subtype="math" data-content="J(\theta_t; x^{(i)}, y^{(i)}) = (x^{(i)T} \theta_t - y^{(i)})^2" contenteditable="false" class="render-node"></span> 是关于单个数据样本的目标函数。</p>
+<h2 id="20250219153423-3b2kiuu" updated="20250219154351">Q1: 批量梯度下降</h2>
+<p id="20250219153344-thistai" updated="20250219154351">在 <span data-type="inline-math" data-subtype="math" data-content="J(\theta)" contenteditable="false" class="render-node"></span> 上使用固定步长的批量梯度下降。这对应于每次参数更新使用整个训练数据集的代价函数梯度。</p>
+<h2 id="20250219153445-c7swktu" updated="20260308173619">Q2: 随机梯度下降</h2>
+<p id="20250219153707-x12anuz" updated="20250219154940">编写一个在此数据集上执行 SGD 的通用过程。你应该首先推导逐点（针对单个数据样本）梯度函数 <span data-type="inline-math" data-subtype="math" data-content="\nabla_\theta J(\theta_t; x^{(i)}, y^{(i)})" contenteditable="false" class="render-node"></span>。然后编写一个过程，通过遍历数据集中的样本进行若干轮参数更新，直到达到停止准则（此处使用所有数据点上的完整目标函数收敛，与批量梯度下降类似）。</p>
+<p id="20250219140331-w942cwy" updated="20250219154953"><span data-type="strong">提示：</span> 为了保证 SGD 的收敛性，学习率 <span data-type="inline-math" data-subtype="math" data-content="\eta_t" contenteditable="false" class="render-node"></span> 对于 <span data-type="inline-math" data-subtype="math" data-content="t" contenteditable="false" class="render-node"></span> 可以选择满足课堂上展示的 <span data-type="strong">定理 2</span>。一个例子是选择 <span data-type="inline-math" data-subtype="math" data-content="\eta_t = (\tau_0 + t)^{-\kappa}" contenteditable="false" class="render-node"></span>，其中常数 <span data-type="inline-math" data-subtype="math" data-content="\tau_0 \geq 0" contenteditable="false" class="render-node"></span> 和 <span data-type="inline-math" data-subtype="math" data-content="\kappa \in (0.5, 1)" contenteditable="false" class="render-node"></span>。</p>
+<pre class="code-block" data-language="python" id="20250219155738-7j519gs" style="line-height: 22px;" updated="20260308173619"><code class="hljs"># 随机梯度下降 (SGD)
+def sgd_function(obj, grad, data, init_guess, step_size, epsilon, max_epoch=100):
+    &quot;&quot;&quot;
+    随机梯度下降 (SGD) 函数，用于最小化目标函数。
+
+    参数:
+    - obj: 目标函数（在整个数据集上评估）。
+    - grad: 目标函数的逐点梯度函数。
+    - data: 用于随机更新的数据集，通常为元组 (X, y)。
+    - init_guess: 参数的初始猜测（向量）。
+    - step_size: 一个函数，根据给定迭代 t 计算学习率。
+    - epsilon: 停止准则（例如完整目标函数收敛）。
+    - max_epoch: 最大迭代轮数（完整遍历数据集的次数），防止无限循环。
+
+    返回:
+    - opt_point: 使目标函数最小化的参数向量。
+    &quot;&quot;&quot;
+   
+    # 在此处编写你的代码 ....
+
+    return opt_point
+</code></pre>
+<h2 id="20250219155001-jxwxepj" updated="20250219155335">Q3: 批量梯度下降与随机梯度下降的比较</h2>
+<p id="20250219155232-yb45bd1" updated="20250219155335">绘制批量梯度下降和随机梯度下降方法的完整目标函数值随迭代次数变化的图。比较两种实现在精度和逐点梯度评估次数方面的行为。</p>
+<h2 id="20250219155021-1k4ttcl" updated="20260308174432">Q4: 小批量梯度下降（可选）</h2>
+<p id="20250219140337-n9pv5lg" updated="20250219155422">你可能注意到 SGD 并不是每次迭代都严格下降，并且可能有较大的“跳跃”。一种折中方法是小批量梯度下降，它使用训练样本的一个子集进行随机参数更新，可以平滑这些大的“跳跃”。</p>
+<p id="20250219155432-lzypsni" updated="20250219155550">构建一个小批量梯度下降函数。请注意，你可以指定一个小批量中使用的数据点数量（<span data-type="strong">n</span>）（当 <span data-type="inline-math" data-subtype="math" data-content="n=1" contenteditable="false" class="render-node"></span> 时，即为 SGD）。</p>
+<p updated="20250219155520" id="20250219155431-12rbfxx">与 SGD 相比，收敛过程是否会如预期变得更平滑？</p>
+<pre class="code-block" data-language="python" id="20250219155910-wk3ko54" style="line-height: 22px;" updated="20260308173805"><code class="hljs"># 小批量梯度下降
+def minibatch_gd_function(obj, grad, data, init_guess, step_size, epsilon, n_batch=32, max_epoch=100):
+    &quot;&quot;&quot;
+    小批量梯度下降函数，用于最小化目标函数。
+
+    参数:
+    - obj: 目标函数（在整个数据集上评估）。
+    - grad: 目标函数的梯度函数（在一个小批量上评估）。
+    - data: 用于随机更新的数据集，通常为元组 (X, y)。
+    - init_guess: 参数的初始猜测（向量）。
+    - step_size: 一个函数，根据给定迭代 t 计算学习率。
+    - epsilon: 停止准则（例如完整目标函数收敛）。
+    - n_batch: 每个小批量的大小。
+    - max_epoch: 最大迭代轮数（完整遍历数据集的次数），防止无限循环。
+
+    返回:
+    - opt_point: 使目标函数最小化的参数向量。
+    &quot;&quot;&quot;
+    
+    # 在此处编写你的代码 ....
+
+    return opt_point
+</code></pre>
+<h1 id="20260308174432-3l3t627" updated="20260310232721">问题 3：使用 MNIST 进行手写数字识别</h1>
+<p id="20260308174432-dxnorzj" updated="20260308174450">在本问题中，我们将应用神经网络自动分类著名的 MNIST 数据集中的手写数字图像（https://en.wikipedia.org/wiki/MNIST_database）。</p>
+<p id="20260308174432-a4vgujq" updated="20250225174040">MNIST 数据集以 CSV 文件形式提供。CSV 中的每一行是一个数据点。第一个数字是数字标签（例如 1, 2, 3 ...），接下来的 784 个数字是 28*28 图像的像素灰度级（0, 255）。在 784 个数字中，前 28 列（1-28）代表图像的第一行，接下来的 28 列（29-56）代表第二行，依此类推。数字示例如下：</p>
+<p id="20260308174432-ukk918o" updated="20250225173009">​<span contenteditable="false" data-type="img" class="img" style="min-width: calc(100% - 0.1em);"><span> </span><span style="width: 300px;"><span class="protyle-action protyle-icons"><span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMore"></use></svg></span></span><img src="assets/image-20250225173005-4g6ulb0.png" data-src="assets/image-20250225173005-4g6ulb0.png" alt="image" /><span class="protyle-action__drag"></span><span class="protyle-action__title"><span></span></span></span><span> </span></span>​</p>
+<p id="20260308174432-dqgsfxy" updated="20250226003552">虽然图像是 28<span data-type="em">28，但你可以直接使用平坦的 784 维向量作为输入。模型将学习平坦向量输入之间的关系，以识别它是什么数字。处理图像类型输入的更高级方法是卷积神经网络，它将图像视为 28</span>28 数据类型输入。然而，这超出了本课程的范围。</p>
+<blockquote id="20260310232635-fgfu5qt" updated="20260310232648">
+<p id="20260310232627-v698cjq" updated="20260310232648">如果你对<span data-type="em">卷积神经网络</span>感兴趣，可以参考 https://en.wikipedia.org/wiki/Convolutional_neural_network。</p>
+</blockquote>
+<p id="20260308174432-mkwjsf1" updated="20250226003657">你可以使用“HW2_background_code.ipynb”代码读取 CSV 文件、准备训练数据、绘制一张图像，以及一些损失函数和激活函数的基础。在开始之前，请仔细阅读提供的代码。</p>
+<blockquote id="20260308174432-uvnjddh" updated="20260310232721">
+<p id="20260308174432-eks15m4" updated="20250226003715"><span data-type="strong">注意：</span></p>
+<p updated="20260310232721" id="20260308174432-90d07w0">取决于你的电脑配置，如果配置较好，可以使用更多训练数据，我们在数据准备函数中提供了 data_use_ratio 参数。如果电脑性能较差或想先测试代码是否运行，可以使用较小的数值。但一般来说笔记本电脑运行 1 万个数据没有问题，效果也不错。<br>
+prepare_binary_data(csv_file, target_labels, train_ratio=0.8, data_use_ratio=1.0)<br>
+prepare_multi_data(csv_file, train_ratio=0.8, data_use_ratio=1.0)</p>
+</blockquote>
+<h2 id="20260308174432-m3l67ix" updated="20250225213314">Q1: 二分类</h2>
+<p id="20260308174432-4wl16bl" updated="20250225193616">虽然 MNIST 通常用于多类分类，但我们将首先研究不同数字子集的二分类，以区分两个数字。在解决这个问题之前，让我们先了解一些细节。</p>
+<p id="20260308174432-4lyiooe" updated="20250225193326">对于二分类问题，我们需要在模型的最后一层使用 sigmoid 激活函数。</p>
+<div data-content="sigmoid(z) = \frac{1}{1 + e^{-z}}" data-subtype="math" id="20260308174432-6tbywxo" updated="20250225175513"><div spin="1"></div></div>
+<p id="20260308174432-h39io0f" updated="20250225193044">损失函数是二元交叉熵损失，也称为负对数似然（NLL）：</p>
+<div data-content="\mathcal{L}_{\text{nll}}(\hat{y}, y) = - \left[ y \log(\hat{y}) + (1 - y) \log(1 - \hat{y}) \right]" data-subtype="math" id="20260308174432-0jpym7e" updated="20250225193044"><div spin="1"></div></div>
+<p id="20260308174432-vdp4u8j" updated="20250225193011">回想一下，当我们进行反向传播时，需要使用链式法则依次计算每一层的梯度，如下所示。</p>
+<div data-content="\frac{\partial \text{loss}}{\partial Z^l} = \frac{\partial A^l}{\partial Z^l} \cdot W^{l+1} \cdot \frac{\partial A^{l+1}}{\partial Z^{l+1}} \cdot \ldots \cdot W^{L-1} \cdot \frac{\partial A^{L-1}}{\partial Z^{L-1}} \cdot W^L \cdot
+\frac{\partial A^L}{\partial Z^L} \cdot
+
+ \frac{\partial \text{loss}}{\partial A^L}" data-subtype="math" updated="20250225193401" id="20260308174432-kgzuc7y"><div spin="1"></div></div>
+<p id="20260308174432-8evkr8l" updated="20250225193647">然而，正如你可能将看到的（可以尝试一下），计算 <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial A^L}" contenteditable="false" class="render-node"></span> 并不简洁。对于使用 softmax 激活的交叉熵损失来说，情况更糟，因为你会得到一个梯度矩阵。直接计算 <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial Z^L}= \frac{\partial A^L}{\partial Z^L} \cdot
+
+ \frac{\partial \text{loss}}{\partial A^L}" contenteditable="false" class="render-node"></span> 会更容易。</p>
+<h3 id="20260308174432-tfrws16" updated="20250225213314"><span data-type="strong">任务 1：sigmoid 和二元交叉熵损失的导数</span></h3>
+<p id="20260308174432-f7yds0h" updated="20250225200416">推导 <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial A^L}" contenteditable="false" class="render-node"></span> 和 <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial Z^L}" contenteditable="false" class="render-node"></span> 的导数方程。（写出推导步骤）<span data-type="text" style="font-family: var(--b3-font-family-protyle); font-size: var(--b3-font-size-editor); background-color: var(--b3-theme-background); color: var(--b3-theme-on-background);">证明对于最后一层 sigmoid 输出层，</span><span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial Z^L} = y_{pred} - y_{true}" contenteditable="false" class="render-node" style="font-family: var(--b3-font-family-protyle); font-size: var(--b3-font-size-editor); background-color: var(--b3-theme-background); color: var(--b3-theme-on-background);"></span><span data-type="text" style="white-space: break-spaces; font-family: var(--b3-font-family-protyle); font-size: var(--b3-font-size-editor); font-variant-ligatures: no-common-ligatures; background-color: var(--b3-theme-background); color: var(--b3-theme-on-background); display: inline !important; float: none;">。</span></p>
+<p id="20260308174432-qlq704v" updated="20250225200324"><span data-type="text" style="white-space: break-spaces; font-family: var(--b3-font-family-protyle); font-size: var(--b3-font-size-editor); font-variant-ligatures: no-common-ligatures; background-color: var(--b3-theme-background); color: var(--b3-theme-on-background); display: inline !important; float: none;">如果你在梯度反向传播中使用这个方程，请注意最后一层的处理。之前，我们使用以下代码计算</span><span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial Z^L}" contenteditable="false" class="render-node" style="white-space: break-spaces; font-family: var(--b3-font-family-protyle); font-size: var(--b3-font-size-editor); font-variant-ligatures: no-common-ligatures; background-color: var(--b3-theme-background); color: var(--b3-theme-on-background);"></span><span data-type="text" style="white-space: break-spaces; font-family: var(--b3-font-family-protyle); font-size: var(--b3-font-size-editor); font-variant-ligatures: no-common-ligatures; background-color: var(--b3-theme-background); color: var(--b3-theme-on-background); display: inline !important; float: none;">：</span></p>
+<p id="20260308174432-095uyud" updated="20250225200111">证明对于最后一层 sigmoid 输出层，<span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial Z^L} = y_{pred} - y_{true}" contenteditable="false" class="render-node"></span>。如果你在梯度反向传播中使用这个方程，请注意最后一层的处理。之前，我们使用以下代码计算 <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial Z^L}" contenteditable="false" class="render-node"></span>：</p>
+<pre class="code-block" data-language="python" id="20260308174432-4tahsgx" updated="20250225200102"><code class="hljs"> dZ = dA_out * self.activation_deriv(self.Z)  # shape (N, output_dim) 
+</code></pre>
+<p id="20260308174432-he8gj3d" updated="20250225200126">现在，它变为：</p>
+<pre class="code-block" data-language="python" id="20260308174432-5ehpveg" updated="20250225200142"><code class="hljs"> dZ = y_pred - y_true  # shape (N, output_dim) 
+</code></pre>
+<p id="20260308174432-zva4vni" updated="20250225200620">因此，你需要特别处理最后一层。</p>
+<p id="20260308174432-1040cdv" updated="20250225200623"><span data-type="text" style="color: var(--b3-font-color1);">注意</span>：你当然可以使用原始方式计算 <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial A^L}" contenteditable="false" class="render-node"></span> 和 <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial Z^L}" contenteditable="false" class="render-node"></span>。但在本任务中，你必须使用 <span data-type="code">dZ = y_pred - y_true</span>，因为下一个 Q2 的 softmax 多类分类也需要使用它，否则 softmax 的 <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \text{loss}}{\partial A^L}" contenteditable="false" class="render-node"></span> 计算过于复杂。</p>
+<p id="20260308174432-xtk48kn" updated="20250225201152">你可以考虑使用以下策略：</p>
+<pre class="code-block" data-language="python" id="20260308174432-0jxxgny" updated="20250225213314"><code class="hljs">class FullyConnectedLayer:
+    def __init__(self, input_dim, output_dim, activation='relu', dim_output=False):
+       # ...
+  
+    def forward(self, A_in):
+       # ...
+       return self.A_out
+  
+    def backward(self, dA_out, y_true=None, is_output_layer=False):
+        # ....
+        if is_output_layer and (self.activation == sigmoid or self.activation == softmax):
+            # dZ = ....
+        else:
+            # dZ = ....
+        # .....
+        return dA_in, dW, db
+    
+    def print_dims(self, label, *args):
+        # ...
+
+
+class NeuralNetwork:
+    def __init__(self, layers_config):
+        # ....
+  
+    def forward(self, X):
+        # ...
+        return A  # 最终输出
+  
+    def backward(self, dA, y_true):
+        for i, layer in reversed(list(enumerate(self.layers))):
+            if i == len(self.layers) - 1:  # 输出层
+                dA, dW, db = layer.backward(dA_out=None, y_true=y_true, is_output_layer=True)
+            else:  # 隐藏层
+                dA, dW, db = layer.backward(dA_out=dA)
+            grads.append((dW, db))
+        # grads 以逆序收集
+        grads.reverse()
+        return grads
+  
+    def update_params(self, grads, lr=0.001):
+       # ...
+</code></pre>
+<h3 id="20260308174432-h05z8p1" updated="20250225213805">任务 2：二分类数字分类</h3>
+<p id="20260308174432-1oaw39k" updated="20250225193820">尝试（至少）以下成对分类任务：1 vs 7, 3 vs 5, 4 vs 9。你也可以尝试其他组合。</p>
+<p id="20260308174432-tncnlg0" updated="20250225193840">请在作业中包含以下讨论：</p>
+<ul start="0" id="20260308174432-mu69zgv" updated="20250225194034">
+<li id="20260308174432-va0fjst" updated="20250225193841">
+<p id="20260308174432-1k7zs7f" updated="20250225193922">报告模型结构如何影响训练速度和预测准确率。</p>
+</li>
+<li id="20260308174432-lshgoqc" updated="20250225194034">
+<p id="20260308174432-6e0ro2v" updated="20250225194034">绘制一些正确和错误预测的示例，讨论错误预测的原因。</p>
+</li>
+</ul>
+<blockquote updated="20250225193606" id="20260308174432-6qaooa9">
+<p id="20260308174432-3gezfab" updated="20250225193529">额外提示：</p>
+<ul start="0" id="20260308174432-hw0fn3r" updated="20250225193606">
+<li id="20260308174432-cpk2wdu" updated="20250225193610">
+<p updated="20250225193610" id="20260308174432-l2kik0w">参考演示代码解决此问题（你应该能找到构建所需神经网络的所有代码片段）。</p>
+</li>
+<li id="20260308174432-839yxwr" updated="20250225193606">
+<p id="20260308174432-9ib9gnm" updated="20250225193606">你可以从以下配置的神经网络结构开始：<br>  
+layers_config = [(784, 128, 'relu'), (128, 64, 'relu'), (64, 1, 'sigmoid')]<br>  
+learning_rate = 0.001, epoch = 100<br>  
+然后修改模型，观察性能如何变化。</p>
+</li>
+</ul>
+</blockquote>
+<h2 id="20260308174432-shbfk7o" updated="20250225220211"><span data-type="strong">Q2: 10 类多分类</span></h2>
+<p updated="20250225213805" id="20260308174432-yqdbt6e">现在，你将扩展二分类方法，使用神经网络对所有 10 个数字（0-9）进行分类。与二分类使用 sigmoid 激活函数不同，最后一层现在必须使用 <span data-type="strong">softmax 激活函数</span>，这通常用于多分类问题。</p>
+<p id="20260308174432-yyiwqzx" updated="20250225213805"><span data-type="strong">softmax 函数</span> 定义为：</p>
+<div data-content="\text{softmax}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{N} e^{z_j}}" data-subtype="math" id="20260308174432-geuqkvc" updated="20250225213829"><div spin="1"></div></div>
+<p id="20260308174432-cwk4742" updated="20250225213822">其中 <span data-type="inline-math" data-subtype="math" data-content="z_i" contenteditable="false" class="render-node"></span> 是类别 <span data-type="inline-math" data-subtype="math" data-content="i" contenteditable="false" class="render-node"></span> 的得分，<span data-type="inline-math" data-subtype="math" data-content="N" contenteditable="false" class="render-node"></span> 是类别总数（此处为 10）。</p>
+<p id="20260308174432-o2qthqt" updated="20250225213805">你需要推导交叉熵损失函数关于 softmax 输入的 <span data-type="strong">梯度</span>。多分类问题的交叉熵损失为：</p>
+<div data-content="\mathcal{L}_{\text{cross-entropy}}(\hat{y}, y) = - \sum_{i=1}^{N} y_i \log(\hat{y}_i)" data-subtype="math" updated="20250225214015" id="20260308174432-a4tc8or"><div spin="1"></div></div>
+<p id="20260308174432-jo2snd7" updated="20250225213850">其中 <span data-type="inline-math" data-subtype="math" data-content="y_i" contenteditable="false" class="render-node"></span> 是 one-hot 编码的真实标签，<span data-type="inline-math" data-subtype="math" data-content="\hat{y}_i" contenteditable="false" class="render-node"></span> 是类别 <span data-type="inline-math" data-subtype="math" data-content="i" contenteditable="false" class="render-node"></span> 的预测概率。</p>
+<p id="20260308174432-y9q2oeu" updated="20250225214316">与 sigmoid 和二元交叉熵损失类似，我们不需要计算 <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \mathcal{L}}{\partial A^L}" contenteditable="false" class="render-node"></span>，而是可以直接计算 <span data-type="inline-math" data-subtype="math" data-content="\frac{\partial \mathcal{L}}{\partial Z^L} = y_{\text{pred}} - y_{\text{true}}" contenteditable="false" class="render-node"></span>（此问题中你不需要推导）。</p>
+<h3 id="20260308174432-qs84myb" updated="20250225220211">任务 1：实现 <span data-type="strong">多分类</span></h3>
+<p updated="20250225214242" id="20260308174432-76fqrak">通过以下方式修改之前的二分类模型：</p>
+<ul start="0" id="20260308174432-zwk441o" updated="20250225214248">
+<li id="20260308174432-fjydglz" updated="20250225213805">
+<p id="20260308174432-e45p9ro" updated="20250225214250">将最后一层激活函数从 sigmoid 改为 softmax。</p>
+</li>
+<li id="20260308174432-lhn7znt" updated="20250225214248">
+<p id="20260308174432-9plis0f" updated="20250225214248">将损失函数更新为交叉熵损失。</p>
+</li>
+</ul>
+<p id="20260308174432-ujtozd0" updated="20250225213805">你可以从以下模型配置开始，之后尝试不同的结构：</p>
+<pre class="code-block" data-language="python" id="20260308174432-0m6i6z3" updated="20250225213805"><code class="hljs">layers_config = [
+    (784, 128, 'relu'),
+    (128, 64, 'relu'),
+    (64, 10, 'softmax')
+]
+learning_rate = 0.001
+epochs = 100
+</code></pre>
+<p id="20260308174432-eahr07s" updated="20250225214534">最后一层现在有 <span data-type="strong">10 个输出单元</span>，对应于 10 个可能的数字类别。</p>
+<p id="20260308174432-8pdiksb" updated="20250225215310">讨论模型和训练参数（如轮数、学习率、模型配置）如何影响预测准确率。</p>
+<p id="20260308174432-ucoy4cq" updated="20250225215221">注意：此任务工作量较大，能跑通就已很不错。</p>
+<h3 id="20260308174432-wz6siwa" updated="20250225235243">任务 2：学习保存和加载训练好的参数</h3>
+<p id="20260308174432-jlqss05" updated="20250225220436">训练完神经网络后，我们希望保存优化后的权重以备后续使用，这样就不必重新训练网络。</p>
+<p id="20260308174432-lpyyxiq" updated="20250225220646">使用以下代码作为参考，尝试自己实现。</p>
+<pre class="code-block" data-language="python" id="20260308174432-ya0tbk9" updated="20250225235131"><code class="hljs">import pickle
+
+class NeuralNetwork:
+    def __init__(self, layers_config):
+        # ...
+
+    def forward(self, X):
+       # ...
+
+    def backward(self, dA, y_true):
+        # ...
+
+    def update_params(self, grads, lr=0.001):
+        # ...
+
+    def save_model(self, file_path):
+        &quot;&quot;&quot;
+        将神经网络的权重和偏置保存到文件。
+        &quot;&quot;&quot;
+        model_data = {
+            &quot;layers_config&quot;: [(layer.W.shape[0], layer.W.shape[1], layer.activation.__name__) for layer in self.layers],
+            &quot;weights&quot;: [layer.W for layer in self.layers],
+            &quot;biases&quot;: [layer.b for layer in self.layers]
+        }
+        with open(file_path, 'wb') as f:
+            pickle.dump(model_data, f)
+        print(f&quot;模型已保存至 {file_path}&quot;)
+
+	# 这个装饰器很重要，记得加上，具体原因可以自行学习：
+	# https://www.geeksforgeeks.org/class-method-vs-static-method-python/
+	# 即你无需创建该类的对象，就可以直接调用此函数，如下面 load_model 所示
+	@staticmethod 
+    def load_model(file_path):
+        &quot;&quot;&quot;
+        从文件加载保存的神经网络模型。
+        &quot;&quot;&quot;
+        with open(file_path, 'rb') as f:
+            model_data = pickle.load(f)
+
+        nn = NeuralNetwork(model_data[&quot;layers_config&quot;])
+        for layer, W, b in zip(nn.layers, model_data[&quot;weights&quot;], model_data[&quot;biases&quot;]):
+            layer.W = W
+            layer.b = b
+  
+        print(f&quot;模型已从 {file_path} 加载&quot;)
+        return nn
+
+</code></pre>
+<p id="20260308174432-gejvi57" updated="20250225235148"><span data-type="strong">保存训练好的模型：</span></p>
+<pre class="code-block" data-language="python" id="20260308174432-uav763e" updated="20250225235148"><code class="hljs">nn.save_model(&quot;trained_model.pkl&quot;)
+</code></pre>
+<p id="20260308174432-c3m5jqw" updated="20250225235220"><span data-type="strong">加载训练好的模型：</span></p>
+<pre class="code-block" data-language="python" id="20260308174432-oqzg7p3" updated="20250225235220"><code class="hljs">loaded_nn = NeuralNetwork.load_model(&quot;trained_model.pkl&quot;)
+</code></pre>
+<blockquote id="20260308174432-lac1lfk" updated="20250225235243">
+<p id="20260308174432-aai0s1d" updated="20250225235243">trained_model.pkl 就是你训练好的权重信息</p>
+</blockquote>
+<p id="20260308174432-fyd14qb" updated="20250225213456">‍</p>
+</div>
+<script src="appearance/icons/material/icon.js?v=3.5.7"></script><script src="appearance/icons/Remix-icon/icon.js?v=3.5.7"></script>
+<script src="stage/build/export/protyle-method.js?v=3.5.7"></script>
+<script src="stage/protyle/js/lute/lute.min.js?v=3.5.7"></script>  
+<script>
+    
+    window.siyuan = {
+      config: {
+        appearance: { mode: 1, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+        editor: { 
+          codeLineWrap: true,
+          fontSize: 16,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: false,
+          katexMacros: decodeURI(`%7B%7D`),
+        }
+      },
+      languages: {copy:"复制"}
+    };
+    const previewElement = document.getElementById('preview');
+    Protyle.highlightRender(previewElement, "stage/protyle");
+    Protyle.mathRender(previewElement, "stage/protyle", false);
+    Protyle.mermaidRender(previewElement, "stage/protyle");
+    Protyle.flowchartRender(previewElement, "stage/protyle");
+    Protyle.graphvizRender(previewElement, "stage/protyle");
+    Protyle.chartRender(previewElement, "stage/protyle");
+    Protyle.mindmapRender(previewElement, "stage/protyle");
+    Protyle.abcRender(previewElement, "stage/protyle");
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, "stage/protyle");
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+            navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd().replace(/ /g, " ").replace(/‍```/g, "```"));
+            event.preventDefault();
+            event.stopPropagation();
+      })
+    });
+</script>
+</body></html>

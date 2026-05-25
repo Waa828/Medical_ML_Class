@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh_CN" data-theme-mode="dark" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+    <base href="">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" id="baseStyle" href="stage/build/export/base.css?v=3.5.7"/>
+    <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="appearance/themes/midnight/theme.css?v=3.5.7"/>
+    <script src="stage/protyle/js/protyle-html.js?v=3.5.7"></script>
+    
+    <title>机器学习 第3-5讲 作业</title>
+    <!-- 由思源导出 v3.5.7 -->
+    <style>
+        body {font-family: var(--b3-font-family);background-color: var(--b3-theme-background);color: var(--b3-theme-on-background)}
+        @font-face {
+  font-family: "Emojis Additional";
+  src: url(appearance/fonts/Noto-COLRv1-2.047/Noto-COLRv1.woff2) format("woff2");
+  unicode-range: U+1fae9, U+1fac6, U+1fabe, U+1fadc, U+e50a, U+1fa89, U+1fadf, U+1f1e6-1f1ff, U+1f3f4, U+e0067, U+e0062,
+  U+e0065, U+e006e, U+e007f, U+e0073, U+e0063, U+e0074, U+e0077, U+e006c;
+  size-adjust: 85%;
+}
+@font-face {
+  font-family: "Emojis Reset";
+  src: local("Segoe UI Emoji"),
+  local("Segoe UI Symbol");
+  unicode-range: U+263a, U+21a9, U+2642, U+303d, U+2197, U+2198, U+2199, U+2196, U+2195, U+2194, U+2660, U+2665, U+2666, 
+  U+2663, U+3030, U+21aa, U+25b6, U+25c0, U+2640, U+203c, U+a9, U+ae, U+2122;
+  size-adjust: 85%;
+}
+@font-face {
+  font-family: "Emojis";
+  src: local("Segoe UI Emoji"),
+  local("Segoe UI Symbol");
+  size-adjust: 85%;
+}
+:root { --b3-font-size-editor: 16px }
+.b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: none }
+        
+        
+    </style>
+    <style id="snippetCSS20240908213950-5chvo6d">/*══════════  颜色与组合字体栈  ══════════*/
+:root {
+  /* 亮色主题 */
+  --h1-clr: #ff6b81;   /* 红宝石色 */
+  --h2-clr: #90a8ff;   /* 皇家蓝 */
+
+  /* 字体栈：拉丁优先使用 Arial，汉字使用中文字体 */
+  --font-yahei: "Arial", "微软雅黑", "Microsoft YaHei",
+                "PingFang SC", "Noto Sans CJK SC", sans-serif;
+
+  --font-kaiti: "Arial", "楷体", "KaiTi", "STKaiti", "KaiTi SC", serif;
+  --font-song:  "Arial", "宋体", "SimSun", serif;
+}
+
+/* 暗色主题变体 */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --h1-clr: #ff6b81;  /* 玫瑰红宝石色 */
+    --h2-clr: #90a8ff;  /* 皇家蓝 300 */
+  }
+}
+
+/*══════════  共享标题属性  ══════════*/
+h1, h2, h3, h4,
+.h1, .h2, .h3, .h4 {
+  margin: 0 0 0.7em;
+  line-height: 1.3;
+  scroll-margin-top: 5rem;           /* 平滑锚点跳转 */
+}
+
+/*══════════  H1  ══════════*/
+h1, .h1 {
+  font-family: var(--font-yahei);
+  font-size: clamp(2.8rem, 5vw + 0.8rem, 3.4rem); /* ≈45–54 px */
+  font-weight: 800;
+  color: var(--h1-clr);
+  letter-spacing: 0.5px;
+}
+
+/*══════════  H2  ══════════*/
+h2, .h2 {
+  font-family: var(--font-yahei);
+  font-size: clamp(2.2rem, 4vw + 0.5rem, 2.8rem); /* ≈34–45 px */
+  font-weight: 700;
+  color: var(--h2-clr);
+}
+
+/*══════════  H3  ══════════*/
+h3, .h3 {
+  font-family: var(--font-kaiti);
+  font-size: 1.625rem;               /* 26 px */
+  font-weight: 700;
+  color: inherit;                    /* 跟随正文颜色 */
+}
+
+/*══════════  H4  (下划线文本)  ══════════*/
+h4, .h4 {
+  font-family: var(--font-song);
+  font-size: 0.75rem;                /* 20 px */
+  font-weight: 500;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;     /* 文字下方留一点间隙 */
+  text-decoration-thickness: 0.75px;    /* 清晰 2px 线条 */
+}
+</style>
+</head>
+<body>
+<div class="b3-typography" 
+style="max-width: 800px;margin: 0 auto;" id="preview"><h1 id="ML-Class-3-5-Homework" updated="20260326103029" title="ML Class 3-5 Homework">机器学习 第3-5讲 作业</h1>
+<h1 id="20250311173417-6senh09" updated="20250315213103">问题1: 用于TLC分析的Rf值预测</h1>
+<p id="20250126170731-t8pblhg" updated="20250311173402">本次作业旨在复现近期发表的一篇期刊文章：Xu, H. et al. High-throughput discovery of chemical structure-polarity relationships combining automation and machine-learning techniques. Chem (2022) doi:10.1016/j.chempr.2022.08.008.</p>
+<p id="20250306165457-g9on94q" updated="20250311173500">薄层色谱（TLC）是一种分离混合物中组分的色谱技术。</p>
+<p id="20250306165457-2nme3ad" updated="20250306165457">​<span contenteditable="false" data-type="img" class="img" style="min-width: calc(100% - 0.1em);"><span> </span><span style="width: 352px;"><span class="protyle-action protyle-icons"><span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMore"></use></svg></span></span><img src="assets/image-20250305235258-49aiipa.png" data-src="assets/image-20250305235258-49aiipa.png" alt="image" /><span class="protyle-action__drag"></span><span class="protyle-action__title"><span></span></span></span><span> </span></span>​</p>
+<p id="20250306165457-h783emk" updated="20250306165457">参考：https://en.wikipedia.org/wiki/Thin-layer_chromatography</p>
+<p updated="20250311174653" id="20250306165457-wyet441"><span data-type="strong">TLC原理：</span> 化合物的分离是由于它们对固定相的吸引力不同以及在溶剂中的溶解度不同。因此，化合物和流动相竞争固定相上的结合位点。样品混合物中的不同化合物因其分配系数的差异而以不同速率移动。不同的溶剂或不同的溶剂混合物会产生不同的分离效果。</p>
+<p updated="20250311174729" id="20250306165457-eoxkdum"><span data-type="strong">保留因子（Rf）</span> 对结果进行量化。它是给定物质移动的距离除以流动相移动的距离。</p>
+<p id="20250311175032-bbdv9vg" updated="20250311175036">​<span contenteditable="false" data-type="img" class="img" style="min-width: calc(100% - 0.1em);"><span> </span><span style="width: 360px;"><span class="protyle-action protyle-icons"><span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMore"></use></svg></span></span><img src="assets/7jso583h-20250311175032-lmbn8h1.png" data-src="assets/7jso583h-20250311175032-lmbn8h1.png" alt="7jso583h" /><span class="protyle-action__drag"></span><span class="protole-action__title"><span></span></span></span><span> </span></span>​</p>
+<p id="20250306165457-bn7kd21" updated="20250313235626">在正相TLC中，固定相（通常为硅胶）是极性的。样品混合物中极性更强的化合物与极性固定相的相互作用更强。因此，极性更强的化合物移动距离更短（导致Rf值更小），而极性较弱的化合物在板上移动得更高（Rf值更高）。此外，流动相的组成也会影响Rf值。极性更强的流动相会使化合物移动更快（Rf值更高），反之亦然。</p>
+<p id="20250306165457-8sibouw" updated="20250306165457">TLC实验可以由化学家手动完成，或者最近由机器人完成：</p>
+<p id="20250306165457-czbodq9" updated="20250306165457">手动操作：https://www.youtube.com/watch?v=ltT8vr5Wmz8</p>
+<p id="20250306165457-imnc69h" updated="20250311175129">自动化：https://www.bilibili.com/video/BV1am4y1o7yE/?vd_source=9b8c50763ab14a904e31cd2732423a33</p>
+<p id="20250306165457-ekwy63f" updated="20250311175220">我们的任务是使用收集的实验数据预测Rf值。</p>
+<h2 id="20250311175220-cseotp6" updated="20250315213103">Q1：下载并理解数据</h2>
+<p id="20250311175245-vcfri7u" updated="20250315162936">您可以从论文提供的链接下载数据，或者直接使用作业中提供的数据。</p>
+<p id="20250315162441-0thre6o" updated="20250315162442">https://www.sciencedirect.com/science/article/pii/S2451929422004211</p>
+<p id="20250315162442-vwufapq" updated="20250315162518">https://github.com/woshixuhao/ML-Prediction-for-Rf-values</p>
+<p id="20250315162937-o9d33ot" updated="20250315162951">使用以下代码读取Excel文件：</p>
+<pre class="code-block" data-language="python" updated="20250315212650" id="20250315162952-1t03ig5"><code class="hljs">import pandas as pd
+# 将Excel文件读取为DataFrame
+# 将Excel文件放在与Python文件相同的文件夹中
+df = pd.read_excel('TLC_dataset.xlsx')
+
+# 你可能需要安装&quot;openpyxl&quot;包来读取Excel文件：
+# pip install openpyxl
+</code></pre>
+<p id="20250315163207-2t5bzrb" updated="20250315163233">Excel文件中数据的解释：</p>
+<table colgroup="||||||" id="20250315163256-jgvp7p0" updated="20250315163412">
+<colgroup><col /><col /><col /><col /><col /><col /><col /></colgroup><thead><tr>
+<th>COMPOUND_SMILES</th>
+<th>H</th>
+<th>EA</th>
+<th>DCM</th>
+<th>MeOH</th>
+<th>Et2O</th>
+<th>Rf</th>
+</tr>
+</thead><tbody><tr>
+<td>分子SMILES</td>
+<td>己烷</td>
+<td>乙酸乙酯</td>
+<td>二氯甲烷</td>
+<td>甲醇</td>
+<td>乙醚</td>
+<td>Rf值</td>
+</tr>
+</tbody>
+</table>
+<p id="20250315163414-vqa0b5f" updated="20250315164014">流动相包含己烷、乙酸乙酯、二氯甲烷、甲醇和乙醚。Excel中的数字表示这些溶剂的体积比。如果考虑这些溶剂的极性，它们的排序为“己烷 &lt; 乙醚 &lt; 二氯甲烷 &lt; 乙酸乙酯 &lt; 甲醇”。因此，可以预期，对于同一分子，极性更强的洗脱液（含有更多极性溶剂）会将分子在TLC板上移动得更高（Rf值更大）。</p>
+<h3 id="20250315213038-7wy3tvy" updated="20250315213103">任务：绘制Rf值 vs. 溶剂比例图</h3>
+<p id="20250315164020-d86jjd1" updated="20250315213103">选择3个分子（任意3个），绘制它们的Rf值随溶剂比例变化的曲线（类似于原始出版物中的图5）。</p>
+<h2 id="20250311175245-ryn1ew3" updated="20250316084036">Q2：构建神经网络模型预测Rf值</h2>
+<p id="20250315164402-p04xlli" updated="20250315164536">如上所述，Rf值由分子结构和洗脱液溶剂组成决定。因此，我们需要将这些因素输入神经网络，神经网络的输出为Rf值。</p>
+<p updated="20250315170715" id="20250315164536-2v57e6m">一种简单的方法是使用分子指纹来表示分子结构。因此，我们可以使用以下模型输入：<span data-type="inline-math" data-subtype="math" data-content="X_i=[\text{fingerprints}, \text{H}, \text{EA}, \text{DCM}, \text{MeOH}, \text{Et2O}]" contenteditable="false" class="render-node"></span>。</p>
+<blockquote id="20250315164834-6vijioj" updated="20250315170845">
+<p id="20250315170724-o38i1w4" updated="20250315170845">原始论文中包含了其他可能有助提高模型精度的分子描述符。然而，就本次作业而言，你不需要这样做。当然，如果你感兴趣，可以像论文那样做类似的事情。</p>
+</blockquote>
+<h3 id="20250315164953-qn3xhsk" updated="20250316084036">任务1：正确地将SMILES转换为指纹</h3>
+<p id="20250315165040-lf7lkc6" updated="20250315165627">在RDkit中，你可以选择不同的指纹类型（Morgan, Feature Morgan, RDKit, Atom pairs, Topological torsions）。我们在课堂上尝试了Morgan指纹。你可以在本次作业中尝试不同的指纹。点击此链接了解更多关于如何使用分子指纹的信息（https://greglandrum.github.io/rdkit-blog/posts/2023-01-18-fingerprint-generator-tutorial.html）</p>
+<pre class="code-block" data-language="python" id="20250316083126-l5rc3xe" updated="20250316084036"><code class="hljs">def smiles_to_fingerprint(smiles, fp_type='morgan', radius=3, fpSize=128):
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        # 如果SMILES转换失败，返回一个全零数组。
+        return np.zeros(fpSize, dtype=int)
+    if fp_type == 'morgan':
+        generator = rdFingerprintGenerator.GetMorganGenerator(radius=radius, fpSize=fpSize)
+    elif fp_type == 'rdkit':
+        generator = rdFingerprintGenerator.GetRDKitFPGenerator(fpSize=fpSize)
+    elif fp_type == 'atompair':
+        generator = rdFingerprintGenerator.GetAtomPairGenerator(fpSize=fpSize)
+    elif fp_type == 'topological':
+        generator = rdFingerprintGenerator.GetTopologicalTorsionGenerator(fpSize=fpSize)
+    else:
+        raise ValueError(f&quot;不支持的指纹类型: {fp_type}&quot;)
+
+    fp = generator.GetFingerprint(mol)
+    arr = np.zeros((fpSize,), dtype=int)
+    DataStructs.ConvertToNumpyArray(fp, arr)
+    return arr
+</code></pre>
+<p id="20250315165631-6e5eeo8" updated="20250315165946"><span data-type="strong">你至少需要尝试两种指纹。</span></p>
+<h3 id="20250315165942-iup9hml" updated="20250315211113">任务2：准备训练和测试数据集</h3>
+<p id="20250315170002-97bsqo6" updated="20250315211113">成功将分子SMILES转换为指纹后，将指纹与溶剂比例拼接，得到<span data-type="inline-math" data-subtype="math" data-content="X_i=[\text{fingerprints}, \text{H}, \text{EA}, \text{DCM}, \text{MeOH}, \text{Et2O}]" contenteditable="false" class="render-node"></span>。</p>
+<p id="20250315170204-4odu6dq" updated="20250315170237">将数据随机划分为训练集和测试集，比例为0.8用于训练，0.2用于测试。</p>
+<h3 id="20250315170237-tony9az" updated="20260324204457">任务3：构建神经网络模型</h3>
+<p id="20250315170703-pzv7eq7" updated="20260324204457">请使用并修改你在机器学习第2讲中尝试过的神经网络模型。</p>
+<p id="20250315170255-bksfwhx" updated="20250315170515">由于Rf值在[0, 1]范围内，你可以考虑使用sigmoid作为最终输出层激活函数，因为sigmoid函数的输出也在[0,1]之间。这也是论文中模型输出层使用的激活函数。</p>
+<p id="20250315170941-cbcb1l6" updated="20250315171000">你可以从如下模型结构开始：</p>
+<pre class="code-block" data-language="python" id="20250315171027-bbdaqwk" updated="20250315171120"><code class="hljs"># X.shape[1] 是你的 X_i 的维度
+layers_config = [
+    (X.shape[1], 64, 'relu'),
+    (64, 32, 'relu'),
+    (32, 1, 'sigmoid')]
+</code></pre>
+<p id="20250315171128-4k48li6" updated="20250315211153">你也可以使用线性输出（不带激活函数）。你可能会得到大于1或小于0的输出值。在模型预测时，可以使用以下函数将大于1的值设为1，小于0的值设为0。</p>
+<div data-content="f(x) =
+\begin{cases} 
+1, &amp; x &gt; 1 \\
+x, &amp; 0 \leq x \leq 1 \\
+0, &amp; x &lt; 0
+\end{cases}" data-subtype="math" id="20250315172530-chwk6pa" updated="20250315172530"><div spin="1"></div></div>
+<h3 id="20250315171411-1nfhxow" updated="20250315211337">任务4：训练模型</h3>
+<p id="20250315171428-m0b6ey4" updated="20250315211217">像作业2那样尝试模型训练。损失函数应使用<span data-type="strong">均方误差（MSE）</span>损失：</p>
+<div data-content="\mathcal{L}_{\text{mse}}(\hat{y}, y) = (\hat{y}_i - y_i)^2" data-subtype="math" id="20250315171539-4brl175" updated="20250315171737"><div spin="1"></div></div>
+<blockquote id="20250315171556-e9zazf1" updated="20250315211224">
+<p id="20250315171600-e0rpq9t" updated="20250315171722">注意：在作业2中，当输出层使用sigmoid激活和二元交叉熵损失时，我们特别处理了梯度。但在这里你不需要这样做。</p>
+</blockquote>
+<p id="20250315211224-y59rqx4" updated="20250315211337">请使用小批量训练方法。尝试不同的学习率和训练轮次以找到最佳性能。</p>
+<h2 id="20250315171041-yqct5yz" updated="20250315172107">Q3：评估模型性能</h2>
+<p id="20250315170435-b9oqtbe" updated="20250315171842">成功完成Q2后，Q3的目的是评估和理解模型。</p>
+<h3 id="20250315171842-lvkemv7" updated="20250315172107">任务1：比较不同指纹的性能</h3>
+<p id="20250315171909-8ys89vc" updated="20250315172031">比较指纹类型、长度（和半径）。你至少需要尝试2种指纹类型和3种其他指纹设置。</p>
+<h3 id="20250315172032-rahut2o" updated="20250315211407">任务2：比较sigmoid和线性输出激活</h3>
+<p id="20250315172801-468noqr" updated="20250315211400">比较sigmoid和线性输出层激活。</p>
+<p id="20250315170234-owygyon" updated="20250315211407">对于线性激活，你不需要使用上面的<span data-type="inline-math" data-subtype="math" data-content="f(x)" contenteditable="false" class="render-node"></span>作为激活函数。像典型的线性回归任务一样，不设激活函数。模型（如果训练正确）应该会自动知道值在[0,1]范围内。只需使用<span data-type="inline-math" data-subtype="math" data-content="f(x)" contenteditable="false" class="render-node"></span>确保输出值在[0,1]内。</p>
+<h3 id="20250315165532-2crhppg" updated="20250315211650">任务3：比较不同的模型结构</h3>
+<p id="20250315211556-ykjdqer" updated="20250315211627">比较神经网络的层数和节点数，观察它们如何影响模型性能。</p>
+<h2 id="20250315211645-d1mk6ki" updated="20250315213122">Q4：案例研究</h2>
+<p updated="20250315212355" id="20250315212302-354z6km">使用你上面获得的最佳模型（对测试数据集最准确），尝试以下任务：</p>
+<h3 id="20250315211650-pub4upk" updated="20250315213122">任务1：理解洗脱液极性（组成）如何影响Rf值</h3>
+<p id="20250315211830-l5e9sfv" updated="20250315213122">从测试数据集中选择3个分子（任意3个）。绘制不同洗脱液组成下的实验和预测Rf值。（类似于原始出版物中的图5）</p>
+<h3 id="20250315211845-4f4l5dh" updated="20260326103021">任务2：寻找分离混合物的合适洗脱液</h3>
+<p id="20250315212135-as877j7" updated="20250315220546">通常，为了获得良好的混合物分离性能，我们需要找到合适的洗脱液组成，使得目标化合物的Rf值在0.2~0.3之间，并且其他化合物与目标化合物的Rf值差大于0.1。在随后的柱色谱中使用这种优化的洗脱液组成，我们通常会得到良好的分离结果。</p>
+<p id="20250315220500-f58d3rf" updated="20250315220503">​<span contenteditable="false" data-type="img" class="img" style="min-width: calc(100% - 0.1em);"><span> </span><span style="width: 612px;"><span class="protyle-action protyle-icons"><span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMore"></use></svg></span></span><img src="assets/image-20250315220500-jxkia2s.png" data-src="assets/image-20250315220500-jxkia2s.png" alt="image" /><span class="protyle-action__drag"></span><span class="protyle-action__title"><span></span></span></span><span> </span></span>​</p>
+<p id="20250315172820-z1oq2df" updated="20250315222250">考虑药物合成中两个广泛使用的反应，我们希望从反应粗产物中分离出产物。</p>
+<p id="20250315220837-h0w326q" updated="20250315222440"><span data-type="strong">反应1：Buchwald-Hartwig交叉偶联反应</span></p>
+<p id="20250315222219-lkw02p7" updated="20250315223452">假设反应粗产物（反应后的混合物）仅包含反应物<span data-type="strong">1</span>和产物<span data-type="strong">2</span>。找到合适的洗脱液组成以从<span data-type="strong">1</span>中分离出<span data-type="strong">2</span>。</p>
+<p id="20250315222141-7dhh88d" updated="20250315222144">​<span contenteditable="false" data-type="img" class="img" style="min-width: calc(100% - 0.1em);"><span> </span><span style="width: 550px;"><span class="protyle-action protyle-icons"><span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMore"></use></svg></span></span><img src="assets/image-20250315222141-p8hrp95.png" data-src="assets/image-20250315222141-p8hrp95.png" alt="image" /><span class="protyle-action__drag"></span><span class="protyle-action__title"><span></span></span></span><span> </span></span>​</p>
+<blockquote id="20250315223314-e4szug9" updated="20250315223407">
+<p id="20250315223318-885496s" updated="20250315223407">参考：https://en.wikipedia.org/wiki/Buchwald%E2%80%93Hartwig_amination</p>
+</blockquote>
+<p id="20250315164344-nmn5k80" updated="20250315223417"><span data-type="strong">反应2：Suzuki-Miyaura交叉偶联反应</span></p>
+<p id="20250315223414-kmh4xb2" updated="20250315223454">类似地，假设反应粗产物（反应后的混合物）仅包含反应物<span data-type="strong">3</span>和产物<span data-type="strong">4</span>。找到合适的洗脱液组成以从<span data-type="strong">3</span>中分离出<span data-type="strong">4</span>。</p>
+<p id="20250315223304-w8iyhkh" updated="20250315223309">​<span contenteditable="false" data-type="img" class="img" style="min-width: calc(100% - 0.1em);"><span> </span><span style="width: 555px;"><span class="protyle-action protyle-icons"><span class="protyle-icon protyle-icon--only"><svg class="svg"><use xlink:href="#iconMore"></use></svg></span></span><img src="assets/image-20250315223304-jior755.png" data-src="assets/image-20250315223304-jior755.png" alt="image" /><span class="protyle-action__drag"></span><span class="protyle-action__title"><span></span></span></span><span> </span></span>​</p>
+<blockquote id="20250315223325-mutb7ci" updated="20250315223341">
+<p id="20250315223330-8jcle53" updated="20250315223341">参考：https://en.wikipedia.org/wiki/Suzuki_reaction</p>
+</blockquote>
+<p id="20250315223509-7k4oqs1" updated="20250315223646">如果你没有安装ChemDraw软件，可以使用在线分子绘图工具绘制分子并获得其SMILES。</p>
+<p updated="20250315223725" id="20250315223552-5rytfte">https://www.rcsb.org/chemical-sketch</p>
+<p id="20250315223727-qcyxy9e" updated="20250315223909">https://molview.org/  ---- 绘制分子，然后点击“Tools--&gt;Information Card”</p>
+<h1 id="20260326103021-12zfdsl" updated="20260326103029">问题2：反应条件优化</h1>
+<h2 id="20260326103021-hkikrbb" updated="20250328222142">问题背景</h2>
+<p id="20260326103021-n6z1p4b" updated="20250328222034">在许多化学反应中，主要挑战之一是不希望的副反应可能发生，降低目标产物的产率和选择性。例如，在C–C Suzuki偶联反应中，期望的转化是钯催化的芳基卤化物（<span data-type="strong">A</span>）与芳基硼酸（<span data-type="strong">B</span>）交叉偶联形成联芳基产物（<span data-type="strong">R</span>）。然而，在碱性水溶液条件和升高的温度下，硼酸（<span data-type="strong">B</span>）容易发生原脱硼反应，这是一种副反应，其中B–C键断裂形成相应的芳烃（<span data-type="strong">S</span>）。这种不希望的反应途径消耗了起始原料<span data-type="strong">B</span>并降低了主偶联反应的效率。</p>
+<p id="20260326103021-hqo3ur4" updated="20250328221836">为了提高目标产物的产率，必须仔细优化反应条件，如温度、反应时间和催化剂浓度，以加速主反应同时最小化副反应速率。</p>
+<div data-content="\text{A (芳基卤化物)} + \text{B (硼酸)} \xrightarrow{\text{Pd催化剂, 碱, 加热}} \text{R (联芳基产物)}" data-subtype="math" id="20260326103021-k4rpfl9" updated="20250328222005"><div spin="1"></div></div>
+<div data-content="\text{B (硼酸)} \xrightarrow{\text{加热, 碱}} \text{S (原脱硼产物, 如 Ar–H)}" data-subtype="math" updated="20250328221656" id="20260326103021-zuemdre"><div spin="1"></div></div>
+<h2 id="20260326103021-hinjakh" updated="20250329154538">问题陈述</h2>
+<p id="20260326103021-lhm2epf" updated="20250329154537">在本问题中，我们旨在在一个简化的动力学系统中最大化产物<span data-type="strong">R</span>的产率，其中发生两个竞争反应。这些反应受经典化学动力学控制，涉及反应物<span data-type="strong">A</span>和<span data-type="strong">B</span>向产物<span data-type="strong">R</span>的期望转化，以及消耗反应物<span data-type="strong">B</span>生成不期望副产物<span data-type="strong">S</span>的竞争副反应。<span data-type="text strong" style="color: var(--b3-font-color1);">我们的目标是最大化R的产率。</span></p>
+<div data-content="A + B \xrightarrow{k_R} R
+\qquad
+k_R = C_{\text{cat}}^{1/2} A_R e^{-\frac{E_{A_R}}{RT}}" data-subtype="math" id="20260326103021-pvy4ppb" updated="20250329154538"><div spin="1"></div></div>
+<div data-content="B \xrightarrow{k_S} S
+\qquad
+k_S = A_S e^{-\frac{E_{A_S}}{RT}}" data-subtype="math" id="20260326103021-72jxk1o" updated="20250328221656"><div spin="1"></div></div>
+<p id="20260326103021-7hf3h0p" updated="20250328224856"><span data-type="strong">此反应的反应参数：</span></p>
+<ul start="0" id="20260326103021-a63niug" updated="20250328224806">
+<li id="20260326103021-163iuc3" updated="20250328222628">
+<p id="20260326103021-ru92i9p" updated="20250328222628"><span data-type="inline-math" data-subtype="math" data-content="C_{A0} = 0.167 \text{ M}" contenteditable="false" class="render-node"></span>：反应物A的初始浓度。</p>
+</li>
+<li id="20260326103021-ceoad5d" updated="20250328222626">
+<p id="20260326103021-9kmmaxi" updated="20250328222626"><span data-type="inline-math" data-subtype="math" data-content="C_{B0} = 0.250 \text{ M}" contenteditable="false" class="render-node"></span>：反应物B的初始浓度。</p>
+</li>
+<li updated="20250328224743" id="20260326103021-4sw49ju">
+<p id="20260326103021-0ewdnpp" updated="20250328224743"><span data-type="inline-math" data-subtype="math" data-content="A_R = 3.1 \times 10^7 \ L^{1/2} \ mol^{-3/2} \ s^{-1}" contenteditable="false" class="render-node"></span>：期望反应的指前因子。</p>
+</li>
+<li id="20260326103021-t8tounm" updated="20250328222732">
+<p id="20260326103021-9u2efbz" updated="20250328222732"><span data-type="inline-math" data-subtype="math" data-content="E_{A_R} = 55 \ kJ \ mol^{-1}" contenteditable="false" class="render-node"></span> 形成R的活化能。</p>
+</li>
+<li id="20260326103021-17a2g9n" updated="20250328224757">
+<p id="20260326103021-nlkda03" updated="20250328224757"><span data-type="inline-math" data-subtype="math" data-content="A_S = 1 \times 10^{12} \ L^{1/2} \ mol^{-3/2} \ s^{-1}" contenteditable="false" class="render-node"></span>：副反应的指前因子。</p>
+</li>
+<li id="20260326103021-199215s" updated="20250328224806">
+<p id="20260326103021-q7tebck" updated="20250328224806"><span data-type="inline-math" data-subtype="math" data-content="E_{A_S} = 100 \ kJ \ mol^{-1}" contenteditable="false" class="render-node"></span>：副反应的活化能。</p>
+</li>
+</ul>
+<p updated="20250328225122" id="20260326103021-p19n2c9">反应条件可在以下范围内选择：</p>
+<table colgroup="||width: 131px;" id="20260326103021-rfp04ky" updated="20250328230219">
+<colgroup><col /><col /><col style="width: 131px;" /></colgroup><thead><tr>
+<th><span data-type="strong">变量</span></th>
+<th><span data-type="strong">范围</span></th>
+<th><span data-type="strong">单位</span></th>
+</tr>
+</thead><tbody><tr>
+<td><span data-type="strong">温度</span></td>
+<td>[30.0, 110.0]</td>
+<td>°C</td>
+</tr>
+<tr>
+<td><span data-type="strong">反应时间</span></td>
+<td>[10.0, 100.0]</td>
+<td>min</td>
+</tr>
+<tr>
+<td><span data-type="strong">催化剂浓度</span></td>
+<td>[0.835, 4.175]</td>
+<td>mM</td>
+</tr>
+</tbody>
+</table>
+<h2 id="20260326103021-50d8rkg" updated="20250329154045">Q1：基于反应动力学计算产率</h2>
+<p id="20260326103021-z8tfpmn" updated="20250329154045">正如我们在反应工程课程中学到的，我们可以使用ODE（常微分方程）求解此类系统。这里，我们给出如下ODE函数：</p>
+<pre class="code-block" data-language="Python" id="20260326103021-5i23b16" updated="20250329153243"><code class="hljs">import numpy as np
+from scipy.integrate import odeint # 你可能需要安装scipy, pip install scipy
+
+# 定义动力学反应模型函数
+def kinetics(condition):
+    &quot;&quot;&quot;
+    计算竞争副反应中目标产物的产率。
+    参数:
+    - condition: 包含 [T, tre, Ccat] 的列表，其中：
+        - T: 温度 (°C)
+        - tre: 反应时间 (min)
+        - Ccat: 催化剂浓度 (mM)
+    返回:
+    - yield_R: 目标产物 R 的产率
+    &quot;&quot;&quot;
+    # 反应物的初始浓度 (单位: M)
+    CA0 = 0.167  # 反应物 A 的初始浓度 (M)
+    CB0 = 0.250  # 反应物 B 的初始浓度 (M)
+  
+    # 主反应和竞争副反应的反应参数
+    AR = 3.1e7   # 主反应的指前因子 (L^(1/2) mol^(−3/2) s^(−1))
+    EAR = 55     # 主反应的活化能 (kJ/mol)
+    EAS = 100    # 副反应的活化能 (kJ/mol)
+    As = 1e12    # 副反应的指前因子 (L^(1/2) mol^(−3/2) s^(−1))
+  
+    # 解包条件：温度 (°C)、停留时间 (min) 和催化剂浓度 (mM)
+    T = condition[0]
+    tre = condition[1]
+    Ccat = condition[2]
+
+    # 单位转换：
+    T = T + 273.15     # 将温度从摄氏度转换为开尔文
+    tre = tre * 60     # 将停留时间从分钟转换为秒
+    Ccat = Ccat / 1000 # 将催化剂浓度从 mM 转换为 g/L
+
+    # 使用阿伦尼乌斯方程计算速率常数
+    R = 8.314 # 气体常数 R J/(mol*K)
+    kr = Ccat ** 0.5 * AR * np.exp(-EAR / (T * R / 1000))  # 主反应的速率常数
+    ks = As * np.exp(-EAS / (T * R / 1000))                # 副反应的速率常数
+
+    # 定义表示反应动力学的 ODE 系统
+    def reaction(w, time):
+        # 解包浓度：a = [A], b = [B], c = [产物 R], d = [副产物 S]
+        a, b, c, d = w
+  
+        # 定义每个物种的变化率：
+        f1 = -kr * a * b             # 反应物 A 的消耗率（仅主反应）
+        f2 = -kr * a * b - ks * b    # 反应物 B 的消耗率（主反应和副反应）
+        f3 = kr * a * b              # 产物 R 的生成率（主反应）
+        f4 = ks * b                  # 副产物 S 的生成率（副反应）
+        return [f1, f2, f3, f4]
+
+    # 为数值积分创建时间数组
+    # 模拟从 0 到 tre/10 秒，时间步长为 0.001 秒。
+    # 注意：使用 tre/10 是一种建模选择，可能代表全部停留时间的一部分。
+    time = np.arange(0, tre / 10, 0.001)
+  
+    # 使用给定的初始条件求解 ODE 系统：
+    # [A] 从 CA0 开始，[B] 从 CB0 开始，产物 [R] 和 [S] 均从 0 开始。
+    re = odeint(reaction, (CA0, CB0, 0.0, 0.0), time)
+  
+    # 从模拟结果中提取产物 R 的最终浓度。
+    # re[-1, :] 给出最后一个时间点；第三个元素（索引 2）对应 [R]。
+    cr = re[-1, :][2]
+  
+    # 计算产物 R 相对于反应物 A 初始浓度的产率
+    y = cr / CA0
+  
+    # 将计算出的产率四舍五入到小数点后4位
+    yield_R = round(y, 4)
+    return yield_R
+</code></pre>
+<p id="20260326103021-3dvp20b" updated="20250328231833"><span data-type="strong">任务1：</span> 当温度为60°C、催化剂浓度为3 mM时，绘制反应产率随反应时间的变化曲线。</p>
+<p id="20260326103021-vej2i2v" updated="20250328231838"><span data-type="strong">任务2：</span> 当反应时间为40分钟、催化剂浓度为3 mM时，绘制反应产率随温度的变化曲线。</p>
+<p id="20260326103021-kmr8zaf" updated="20250328231840"><span data-type="strong">任务3：</span> 当温度为60°C、反应时间为40分钟时，绘制反应产率随催化剂浓度的变化曲线。</p>
+<h2 id="20260326103021-iof74lf" updated="20250329151325">Q2：使用Matérn52核构建高斯过程</h2>
+<p id="20260326103021-fk73y1d" updated="20250328232603">在课堂上，我们学习了<span data-type="strong">径向基函数（RBF）核</span>。在本问题中，我们使用<span data-type="strong">Matérn-52核</span>。Matérn-52核函数如下：</p>
+<div data-content="k(x_i, x_j) = \sigma_f^2 \left(1 + \frac{\sqrt{5} d}{l} + \frac{5 d^2}{3l^2} \right) e^{-\frac{\sqrt{5} d}{l}}" data-subtype="math" updated="20250328221656" id="20260326103021-qu05rnd"><div spin="1"></div></div>
+<p id="20260326103021-t6kgssr" updated="20250328221656">其中：</p>
+<ul start="0" id="20260326103021-ty6omoo" updated="20250328221656">
+<li id="20260326103021-45onkj7" updated="20250328232459">
+<p id="20260326103021-jrrxvd1" updated="20250328232459"><span data-type="inline-math" data-subtype="math" data-content="d = ||\mathbf{x_i} - \mathbf{x_j}||" contenteditable="false" class="render-node"></span> 是两点之间的欧氏距离。</p>
+</li>
+<li id="20260326103021-yudsjji" updated="20250328221656">
+<p id="20260326103021-06u035s" updated="20250328221656"><span data-type="inline-math" data-subtype="math" data-content="l" contenteditable="false" class="render-node"></span>（长度尺度）控制每个训练点影响的范围。</p>
+</li>
+<li id="20260326103021-s23dkj3" updated="20250328221656">
+<p id="20260326103021-dr41w45" updated="20250328221656"><span data-type="inline-math" data-subtype="math" data-content="\sigma_f" contenteditable="false" class="render-node"></span>（信号方差）决定函数的垂直变化。</p>
+</li>
+</ul>
+<pre class="code-block" data-language="Python" id="20260326103021-mcubuhv" updated="20250329151325"><code class="hljs">import numpy as np
+from scipy.spatial.distance import cdist
+def matern52_kernel(x1, x2, sigma_f, length_scale):
+    &quot;&quot;&quot;
+    计算两组点之间的 Matérn 52 核。
+    参数:
+    - X1: 第一组点 (N1 x d)。
+    - X2: 第二组点 (N2 x d)。
+    - length_scale: 控制函数的平滑度。
+    - sigma_f: 信号方差（决定函数幅度）。
+    返回:
+    - 形状为 (N1 x N2) 的核矩阵。
+    &quot;&quot;&quot;
+    if x1.ndim == 1:
+        x1 = x1.reshape(-1, 1)
+    if x2.ndim == 1:
+        x2 = x2.reshape(-1, 1)
+    dists = cdist(x1, x2, 'euclidean')
+    term1 = (1 + np.sqrt(5) * dists / length_scale + (5 * dists ** 2) / (3 * length_scale ** 2))
+    matern52 = sigma_f ** 2 * term1 * np.exp(-np.sqrt(5) * dists / length_scale)
+    return matern52
+</code></pre>
+<p id="20260326103021-wspiwl2" updated="20250329115843"><span data-type="strong">任务：</span> 使用课堂“BayesianOpt.ipynb”中“Demo: using GP to regress a function”部分的代码。将核函数从RBF核替换为Matérn-52核，并在回归带噪声的y=sin(x)任务中比较它们的差异。</p>
+<blockquote id="20260326103021-imcdizx" updated="20250329151300">
+<p id="20260326103021-uwbta6v" updated="20250329151300"><span data-type="strong">两种核的区别：</span></p>
+<p id="20260326103021-lq6lc9d" updated="20250329151255">RBF核强制高平滑性，而Matérn 52核通过在建模函数中允许更粗糙的行为，在平滑性和灵活性之间提供折衷。</p>
+</blockquote>
+<h2 id="20260326103021-914jwjj" updated="20250329153227">Q3：尝试设计实验采样方法</h2>
+<p id="20260326103021-ctyd0gv" updated="20250329151703">正如课堂上所学，对于贝叶斯优化，我们需要从一些数据点开始。在课堂上提供的演示代码中，我们可以使用随机采样的数据点或均匀分布的数据点。在本问题中，我们希望使用<span data-type="strong">设计实验（DOE）</span>方法初始化贝叶斯优化。DOE在理论上是一种更可靠的采样未知空间的方法。你可以使用如下代码使用DOE方法：</p>
+<pre class="code-block" data-language="python" id="20260326103021-cinbob3" updated="20250329152849"><code class="hljs"># 在使用此代码前请 pip install pyDOE
+import numpy as np
+from pyDOE import lhs  # 安装 pyDOE
+
+def generate_doe(bounds, num_samples):
+    &quot;&quot;&quot;
+    使用拉丁超立方采样（LHS）生成DOE样本，并可选择评估它们。
+    参数:
+    bounds : np.ndarray
+        一个形状为 (n_parameters, 2) 的二维数组，每行指定参数的下限和上限。
+    num_samples : 要生成的DOE样本数量。
+    返回:
+    X : np.ndarray
+        缩放到指定边界的DOE采样点。
+    &quot;&quot;&quot;
+    num_params = bounds.shape[0]
+  
+    # 生成归一化的LHS样本（每个值在 [0, 1] 内）
+    normalized_samples = lhs(num_params, samples=num_samples)
+  
+    # 将样本缩放到由 bounds 定义的实际搜索空间
+    X = normalized_samples * (bounds[:, 1] - bounds[:, 0]) + bounds[:, 0]
+    return X
+
+# 定义参数搜索空间（每行：[下限, 上限]）
+bounds = np.array([
+    [30, 110],      # 温度 (°C)
+    [10, 100],      # 反应时间 (min)
+    [0.835, 4.175]  # 催化剂浓度 (mM)
+])
+
+# 确定参数数量和初始样本数量
+num_params = bounds.shape[0]
+num_initial_samples = 5
+
+# 生成DOE样本点 
+X_train = generate_doe(bounds, num_initial_samples)
+</code></pre>
+<p id="20260326103021-1hgquuk" updated="20250329153227"><span data-type="strong">任务：</span> 尝试这种采样方法，并在3D图中绘制采样点（代码已在Jupyter notebook中提供）。</p>
+<blockquote id="20260326103021-as823un" updated="20250329153146">
+<p id="20260326103021-8ydn0iw" updated="20250329153146">你可能注意到每次采样点都不同。这是因为：</p>
+<p id="20260326103021-a1t1r41" updated="20250329153138">拉丁超立方采样（LHS）本质上是一种随机方法，意味着它在参数空间上生成均匀分布但随机的样本点。因此，每次调用LHS函数时，如果不固定随机种子，你会得到不同的样本点。</p>
+</blockquote>
+<h2 id="20260326103021-una2m60" updated="20250329174648">Q4：贝叶斯优化寻找最大化物种R产率的反应条件</h2>
+<p id="20260326103021-2ytxj86" updated="20250329173921">遵循课堂上讨论的示例代码，你可以使用期望改进（EI）采集函数设置贝叶斯优化。</p>
+<p id="20260326103021-x38iw5a" updated="20250329174648"><span data-type="strong">任务：</span> 你的主要工作是理解优化过程对最终最优条件和产率的影响。</p>
+<h2 id="20260326103021-lxn3oi6" updated="20250329164101"></h2>
+</div>
+<script src="appearance/icons/material/icon.js?v=3.5.7"></script><script src="appearance/icons/Remix-icon/icon.js?v=3.5.7"></script>
+<script src="stage/build/export/protyle-method.js?v=3.5.7"></script>
+<script src="stage/protyle/js/lute/lute.min.js?v=3.5.7"></script>  
+<script>
+    
+    window.siyuan = {
+      config: {
+        appearance: { mode: 1, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+        editor: { 
+          codeLineWrap: true,
+          fontSize: 16,
+          codeLigatures: false,
+          plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+          codeSyntaxHighlightLineNum: false,
+          katexMacros: decodeURI(`%7B%7D`),
+        }
+      },
+      languages: {copy:"复制"}
+    };
+    const previewElement = document.getElementById('preview');
+    Protyle.highlightRender(previewElement, "stage/protyle");
+    Protyle.mathRender(previewElement, "stage/protyle", false);
+    Protyle.mermaidRender(previewElement, "stage/protyle");
+    Protyle.flowchartRender(previewElement, "stage/protyle");
+    Protyle.graphvizRender(previewElement, "stage/protyle");
+    Protyle.chartRender(previewElement, "stage/protyle");
+    Protyle.mindmapRender(previewElement, "stage/protyle");
+    Protyle.abcRender(previewElement, "stage/protyle");
+    Protyle.htmlRender(previewElement);
+    Protyle.plantumlRender(previewElement, "stage/protyle");
+    document.querySelectorAll(".protyle-action__copy").forEach((item) => {
+      item.addEventListener("click", (event) => {
+            navigator.clipboard.writeText(item.parentElement.nextElementSibling.textContent.trimEnd().replace(/ /g, " ").replace(/‍```/g, "```"));
+            event.preventDefault();
+            event.stopPropagation();
+      })
+    });
+</script>
+</body></html>
